@@ -1,0 +1,274 @@
+.centered-row {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.button-container .btn {
+  margin-right: 10px;
+}
+
+.centered-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.fixed-plugin li > a,
+.fixed-plugin .badge {
+  transition: all 0.34s;
+  -webkit-transition: all 0.34s;
+  -moz-transition: all 0.34s;
+}
+
+.fixed-plugin .theme-menu {
+  left: auto !important;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+}
+.fixed-plugin .dropdown .theme-menu .now-ui-icons {
+  top: 5px;
+}
+.fixed-plugin .theme-menu:after,
+.fixed-plugin .theme-menu:before {
+  right: 10px;
+  margin-left: auto;
+  left: auto;
+}
+.fixed-plugin .fa-circle-thin {
+  color: #fff;
+}
+.fixed-plugin .active .fa-circle-thin {
+  color: #0bf;
+}
+.fixed-plugin .theme-menu > .active > a,
+.fixed-plugin .theme-menu > .active > a:hover,
+.fixed-plugin .theme-menu > .active > a:focus {
+  color: #777;
+  text-align: center;
+}
+.fixed-plugin img {
+  border-radius: 0;
+  width: 80px;
+  height: 100px;
+  margin: 0 auto;
+}
+.fixed-plugin .theme-menu li > a:hover,
+.fixed-plugin .theme-menu li > a:focus {
+  box-shadow: none;
+}
+.fixed-plugin .badge {
+  border: 3px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  height: 23px;
+  margin-right: 5px;
+  position: relative;
+  width: 23px;
+}
+.fixed-plugin .badge.active,
+.fixed-plugin .badge:hover {
+  border-color: #0bf;
+}
+.fixed-plugin .badge-blue {
+  background-color: cyan;
+}
+.fixed-plugin .badge-green {
+  background-color: green;
+}
+.fixed-plugin .badge-purple {
+  background-color: purple;
+}
+.fixed-plugin .badge-orange {
+  background-color: orange;
+}
+.fixed-plugin .badge-red {
+  background-color: red;
+}
+.fixed-plugin .badge-ananas {
+  background-color: rgb(235, 152, 0);
+}
+.fixed-plugin h5 {
+  font-size: 14px;
+  margin: 10px;
+}
+.fixed-plugin .theme-menu li {
+  display: block;
+  padding: 5px 2px;
+  width: 20%;
+  float: left;
+}
+.fixed-plugin li.adjustments-line,
+.fixed-plugin li.header-title,
+.fixed-plugin li.button-container {
+  width: 100%;
+  height: 50px;
+  min-height: inherit;
+}
+.fixed-plugin li.button-container {
+  height: auto;
+}
+.fixed-plugin li.button-container .md-button.md-just-icon {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.fixed-plugin #sharrreTitle {
+  text-align: center;
+  padding: 10px 0;
+  height: 50px;
+}
+.fixed-plugin li.header-title {
+  height: 20px;
+  line-height: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+}
+.fixed-plugin .github-buttons {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.fixed-plugin .adjustments-line p {
+  float: left;
+  /* display: inline-block; */
+  margin-bottom: 0;
+  font-size: 1em;
+  color: #3c4858;
+}
+.fixed-plugin .adjustments-line a {
+  color: transparent;
+}
+.fixed-plugin .adjustments-line a .badge-colors {
+  position: relative;
+  top: -2px;
+}
+.fixed-plugin .adjustments-line a a:hover,
+.fixed-plugin .adjustments-line a a:focus {
+  color: transparent;
+}
+.fixed-plugin .adjustments-line .togglebutton {
+  text-align: center;
+}
+.fixed-plugin .adjustments-line .togglebutton .label-switch {
+  position: relative;
+  left: -10px;
+  font-size: 14;
+  color: grey;
+}
+.fixed-plugin .adjustments-line .togglebutton .label-switch.label-right {
+  left: 10px;
+}
+.fixed-plugin .adjustments-line .togglebutton .toggle {
+  margin-right: 0;
+}
+.fixed-plugin .adjustments-line .theme-menu > li.adjustments-line > a {
+  padding-right: 0;
+  padding-left: 0;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0;
+  margin: 0;
+}
+.fixed-plugin .theme-menu > li > a.img-holder {
+  font-size: 16px;
+  float: left;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 3px solid #fff;
+  padding-left: 0;
+  padding-right: 0;
+  opacity: 1;
+  cursor: pointer;
+  display: block;
+  max-height: 100px;
+  overflow: hidden;
+  padding: 0;
+}
+.fixed-plugin .theme-menu > li > a.img-holder img {
+  margin-top: auto;
+  float: left;
+}
+.fixed-plugin .theme-menu > li a.switch-trigger:hover,
+.fixed-plugin .theme-menu > li > a.switch-trigger:focus {
+  background-color: transparent;
+}
+.fixed-plugin .theme-menu > li:hover > a.img-holder,
+.fixed-plugin .theme-menu > li:focus > a.img-holder {
+  border-color: rgba(0, 187, 255, 0.53);
+}
+.fixed-plugin .theme-menu > .active > a.img-holder,
+.fixed-plugin .theme-menu > .active > a.img-holder {
+  border-color: #0bf;
+  background-color: #fff;
+}
+
+.fixed-plugin .dropdown .theme-menu {
+  -webkit-transform: translateY(-2%);
+  -moz-transform: translateY(-2%);
+  -o-transform: translateY(-2%);
+  -ms-transform: translateY(-2%);
+  transform: translateY(-2%);
+  top: 27px;
+  opacity: 0;
+  transform-origin: 0 0;
+}
+.fixed-plugin .dropdown .theme-menu:before {
+  border-left: 16px solid rgba(0, 0, 0, 0.2);
+  right: -16px;
+}
+.fixed-plugin .dropdown .theme-menu:after {
+  border-left: 16px solid #fff;
+  right: -15px;
+}
+.fixed-plugin .dropdown .theme-menu:before,
+.fixed-plugin .dropdown .theme-menu:after {
+  content: "";
+  border-bottom: 16px solid transparent;
+  border-top: 16px solid transparent;
+  display: inline-block;
+  position: absolute;
+  top: 65px;
+  width: 16px;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+}
+.fixed-plugin .dropdown.show .theme-menu {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translateY(4%);
+  -moz-transform: translateY(4%);
+  -o-transform: translateY(4%);
+  -ms-transform: translateY(4%);
+  transform: translateY(4%);
+  transform-origin: 0 0;
+}
+.fixed-plugin .bootstrap-switch {
+  margin: 0;
+}
+.fixed-plugin .theme-menu > li > a.img-holder {
+  font-size: 16px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 3px solid #fff;
+  padding-left: 0;
+  padding-right: 0;
+  opacity: 1;
+  cursor: pointer;
+  display: block;
+  max-height: 100px;
+  overflow: hidden;
+  padding: 0;
+  min-width: 15%;
+}
+.fixed-plugin .dropdown .theme-menu li.adjustments-line {
+  border-bottom: 1px solid #ddd;
+}
+.fixed-plugin .dropdown .theme-menu li {
+  padding: 5px 2px !important;
+}

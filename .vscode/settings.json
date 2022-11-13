@@ -1,0 +1,8 @@
+{
+  "files.eol": "\n",
+  "eslint.alwaysShowStatus": true,
+  "vetur.format.options.tabSize": 1,
+  "pretty-formatter.braceLine": true,
+  "pretty-formatter.braces": true,
+  "pretty-formatter.compressedCss": true
+}

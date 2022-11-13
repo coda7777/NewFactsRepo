@@ -1,0 +1,153 @@
+body.dark-mode {
+  color: rgb(204, 204, 204);
+  background-color: #141a2b;
+}
+
+.dark-mode .darkwrapper {
+  background-color: #111725 !important;
+}
+
+body.dark-mode .container {
+  background-color: #111725 !important;
+}
+
+body.dark-mode .flex h1 {
+  color: #fff;
+}
+
+body.dark-mode .card {
+  background-color: #2c3859 !important;
+}
+
+.dark-mode .form-control:disabled,
+.form-control[readonly] {
+  background-color: #a5a5a5;
+  opacity: 1;
+  color: navy;
+}
+
+.mode-toggle {
+  position: relative;
+  padding: 0;
+  width: 44px;
+  height: 24px;
+  min-width: 36px;
+  min-height: 20px;
+  background-color: #262626;
+  border: 0;
+  border-radius: 24px;
+  outline: 0;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 2;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  appearance: none;
+  transition: background-color 0.5s ease;
+}
+.mode-toggle .toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  box-shadow: inset 0 0 0 2px #a5abba;
+  overflow: hidden;
+  transition: transform 0.5s ease;
+}
+.mode-toggle .toggle #dark-mode {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.mode-toggle .toggle #dark-mode:before {
+  content: "";
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  float: left;
+  background-color: #a5abba;
+  transition: border-radius 0.5s ease, width 0.5s ease, height 0.5s ease,
+    left 0.5s ease, transform 0.5s ease;
+}
+
+body.dark-mode .mode-toggle {
+  background-color: #ffffff;
+}
+body.dark-mode .mode-toggle .toggle {
+  transform: translateX(19px);
+}
+body.dark-mode .mode-toggle .toggle #dark-mode:before {
+  border-radius: 50%;
+  width: 150%;
+  height: 85%;
+  background-color: #f3e300;
+  left: 40%;
+  transform: translate(-10%, -40%), rotate(-35deg);
+}
+/* Property table */
+.dark-mode .GFS-Center-Table {
+  box-shadow: 0 2px 22px 0 rgba(184, 9, 9, 0.1),
+    0 4px 20px 0 rgba(207, 207, 207, 0.15);
+  background: rgb(53, 53, 53);
+}
+
+.dark-mode .GFS-Center-Table .GFS-TNave {
+  box-shadow: 0 2px 22px 0 rgba(0, 0, 0, 0.1), 0 4px 20px 0 rgba(0, 0, 0, 0.15);
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgb(15, 187, 218) 0%,
+    rgb(3, 97, 151) 100%,
+    rgb(50, 122, 163) 100%
+  );
+  color: blanchedalmond;
+}
+
+.dark-mode .table th,
+.dark-mode .table td,
+.dark-mode .table tr {
+  color: white;
+  border: 0px;
+  border-bottom: 1px solid rgba(235, 153, 0, 0.342);
+}
+
+.dark-mode .bg-light {
+/*   background-color: linear-gradient(
+    180deg,
+    #232a3d 0%,
+    #283046 100%,
+    rgba(0, 63, 99, 1) 100%
+  ) !important; */
+  box-shadow: none;
+  background-color: #111727 !important;
+  border-bottom: 1px solid #ebd00099;
+}
+
+.dark-mode .bg-light .nav-link {
+  color: rgb(255, 255, 255);
+}
+
+.dark-mode .bg-light .nav-link:hover {
+  color: rgb(235, 152, 0);
+}
+
+.dark-mode .navbar-light .navbar-nav .nav-link,
+.dark-mode .navbar-light .nav-item .b-nav-dropdown .dropdown a {
+  color: #ffffff;
+}
+
+.dark-mode .navbar-light .navbar-nav .nav-link.disabled {
+  color: rgb(119, 119, 119);
+}
+
+.dark-mode hr {
+  background: #7f774c;
+}
