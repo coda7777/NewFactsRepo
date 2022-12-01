@@ -824,8 +824,8 @@
   </b-container>
 </template>
 <script>
-import Widgets from "../connectivity/DisplayFacts.vue";
-import APIIntegration from "../connectivity/APIIntegration.vue";
+import Widgets from "./DisplayFacts.vue";
+import APIIntegration from "./APIIntegration.vue";
 export default {
   data() {
     return {
