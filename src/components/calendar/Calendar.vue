@@ -103,15 +103,15 @@
           </button>
         </b-col>
         <b-col class="nav justify-content col-lg-12">
-          <div style="margin-left: 15px" v-for="source in getSourceList" :key="source.id">
+          <div style="margin-left: 15px" v-for="room in getRoomsList" :key="room.id">
             <input
               type="checkbox"
               v-model="sourcesIds"
               @click="selectSource"
-              :value="source.id"
+              :value="room.id"
               style="margin-right: 4px"
             />
-            <label>{{ source.name }}</label>
+            <label>{{ room.room_name }}</label>
           </div>
         </b-col>
       </b-row>
@@ -190,14 +190,15 @@ export default {
     ...mapGetters({
       getCurrentDate: "calendar/getCurrentDate",
       getterIsSave: "calendar/isSave",
+      getRoomsList: "calendar/getRoomsList",
       getSourceList: "calendar/getSourcesList",
       getColorsList: "calendar/getColors",
     }),
     SelectedBoxes() {
-      console.log("this.getSourceList", this.getSourceList);
-      return this.getSourceList
-        .filter((source) => this.sourcesIds.includes(source.id))
-        .map((source) => source.name);
+      console.log("this.getSourceList", this.getRoomsList);
+      return this.getRoomsList
+        .filter((room) => this.sourcesIds.includes(room.id))
+        .map((room) => room.room_name);
     },
     currentTabComponent() {
       return this.currentTab;
@@ -210,6 +211,7 @@ export default {
     }),
     ...mapActions({
       calendarExcelDownload: "calendar/calendarExcelDownload",
+      saveRooms: "calendar/saveRooms",
       saveSources: "calendar/saveSources",
       actionGetUserSources: "calendar/getUserSources",
     }),
@@ -265,8 +267,9 @@ export default {
       await this.calendarExcelDownload();
     },
     async save() {
-      if (await this.saveSources()) {
-        await this.actionGetUserSources();
+      if (await this.saveRooms()) {
+          this.SET_IS_SAVE(false)
+          await this.actionGetUserSources();
       }
     },
   },

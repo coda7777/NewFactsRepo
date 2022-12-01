@@ -25,7 +25,7 @@
           <div>
             <h4 style="text-align-last: center">Accommodations</h4>
             <b-list-group v-for="(property, index) in properties" :key="index">
-              <b-list-group-item href="#some-link">{{ property.hotelName }}</b-list-group-item>
+              <b-list-group-item @click="changeSelectHotel(property.id)" href="#some-link">{{ property.hotelName }}</b-list-group-item>
             </b-list-group>
           </div>
           <br />
@@ -55,7 +55,7 @@
           </div>
         </b-col>
         <b-col cols="10">
-          <b-row>
+          <!-- <b-row>
             <b-col cols="12">
               <div
                 class="form-group row"
@@ -77,7 +77,7 @@
                 </span>
               </div>
             </b-col>
-          </b-row>
+          </b-row> -->
           <hr />
           <Calendar />
         </b-col>
@@ -283,11 +283,13 @@ iframe.width = "50%";
 iframe.height = "50%";
 </script> -->
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import Calendar from "../calendar/Calendar.vue";
 
 export default {
   data() {
     return {
+      currentHotel_ID:null,
       miniProfileModal: false,
       company: {
         company: "",
@@ -301,6 +303,11 @@ export default {
       newCalendar: false,
     };
   },
+  watch:{
+    getCurrentHotelID(){
+      this.actionGetHotelRooms(this.currentHotel_ID)
+    }
+  },
   /* created() {
     // If another component is already loading the script
     this.$root.$on("loading_script", (e) => {
@@ -313,6 +320,9 @@ export default {
     //this.getPartners();
   },
   computed: {
+    ...mapGetters({
+      getCurrentHotelID: "calendar/getCurrentHotelID",
+    }),
     /* userLists() {
       return this.$store.getters["settings/getuserLists"];
     }, */
@@ -339,6 +349,15 @@ export default {
     Calendar,
   },
   methods: {
+    ...mapMutations({
+      SET_CURRENT_HOTEL_ID: "calendar/SET_CURRENT_HOTEL_ID",
+    }),
+    ...mapActions({
+      actionGetHotelRooms: "calendar/getHotelRooms",
+    }),
+    changeSelectHotel(hotel_id){
+      this.SET_CURRENT_HOTEL_ID(hotel_id)
+    },
     /* getPartners() {
       const filtration = {
         page: 1,
@@ -396,14 +415,14 @@ export default {
 
         script.onload = () => {
           // emit to global event bus to inform other components
-           // we are already loading the script 
+           // we are already loading the script
           this.$root.$emit("script_loaded");
           resolve();
         };
 
         document.head.appendChild(script);
       });
-    }, 
+    },
 
     async use_script() {
       try {

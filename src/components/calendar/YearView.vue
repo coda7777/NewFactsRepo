@@ -11,7 +11,7 @@
       <div class="d-flex flex-column mb-3 bg-light">
         <div class="d-flex flex-row">
           <!-- Create new Source  -->
-          <div class=""><CreateSource /></div>
+          <!-- <div class=""><CreateSource /></div> -->
 
           <div class="d-flex flex-row w-100 justify-content-around align-items-start border-bottom">
             <span @click="prevMonth()" class="btn btn-info rounded-0 px-5">Prev</span>
@@ -38,14 +38,16 @@
       </div>
       <!-- Source Row  -->
       <div class="border-top">
-        <SourceRow
-          v-for="(source, index) in getSourcesList"
+        <RoomRow
+          v-for="(room, index) in getRoomsList"
           :key="index"
-          :source="source"
+          :room="room"
           :daysCount="daysCount"
           :month="currentMonth"
           :year="currentYear"
-        />
+        >
+
+        </RoomRow>
       </div>
     </div>
   </div>
@@ -54,11 +56,12 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import CreateSource from "./CreateSource.vue";
-import SourceRow from "./SourceRow.vue";
+// import SourceRow from "./SourceRow.vue";
+import RoomRow from "./RoomRow.vue";
 
 export default {
   name: "YearView",
-  components: { CreateSource, SourceRow },
+  components: { CreateSource, RoomRow },
   data() {
     return {
       currentMonth: null, // number of  current month selected like jun=1
@@ -69,8 +72,8 @@ export default {
 
   computed: {
     ...mapGetters({
+      getRoomsList: "calendar/getRoomsList",
       getMonthNames: "calendar/getMonthNames", // get Month name
-      getSourcesList: "calendar/getSourcesList",
       getterGetDate: "calendar/getDate", // get source list
     }),
 
@@ -93,7 +96,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      actionGetUserSources: "calendar/getUserSources",
+      actionGetHotelRooms: "calendar/getHotelRooms",
       actionsSetCurrentDate: "calendar/setCurrentDate",
       actionSetDate: "calendar/setDate",
     }),
@@ -103,7 +106,7 @@ export default {
       let date = `${this.currentYear}-${month}-01`;
       console.log("currentDate", date);
       this.actionsSetCurrentDate(date);
-      this.actionGetUserSources();
+      this.actionGetHotelRooms(1);
     },
     defaultMonth() {
       const date = new Date();

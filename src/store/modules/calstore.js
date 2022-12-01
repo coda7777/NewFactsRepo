@@ -38,10 +38,15 @@ export default {
       "December",
     ],
     sources: [],
+    rooms:[],
+    currentHotel_Id:1,
     currentDate: "",
     calendarGroups: ["Contracted"],
   },
   getters: {
+    getCurrentHotelID(state){
+      return state.currentHotel_Id
+    },
     getCalendarGroups(state) {
       return state.calendarGroups;
     },
@@ -60,10 +65,10 @@ export default {
     getMonthNames(state) {
       return state.monthNames;
     },
-    getSourcesList(state) {
-      console.log("store log state.sources", state.sources);
-      return state.sources;
+    getRoomsList(state) {
+      return state.rooms;
     },
+
     getSourceById: (state) => (id) => {
       /* console.log("store get source by ID state", state);
       console.log("store get source by ID state", id);
@@ -104,6 +109,18 @@ export default {
           link.click();
         });
     },
+
+    async saveRooms({state}){
+      try {
+        console.log("sources:", state.sources);
+        await jwtInterceptor.post("/api/stop-sale/save/", {
+          data: { rooms: state.rooms, date: state.currentDate },
+        });
+        return true;
+      } catch (err) {
+        console.log("Error To create source", err.response.data);
+      }
+    },
     async saveSources({ state }) {
       try {
         console.log("sources:", state.sources);
@@ -130,19 +147,34 @@ export default {
         });
     },
 
-    async getUserSources({ commit, state }) {
-      console.log("store log getUserSources");
+
+    async getHotelRooms({ commit, state },hotel_id) {
+      console.log("store log getHotelRooms");
       await jwtInterceptor
-        .get(`/api/stop-sale/?date=${state.currentDate}`)
+        .get(`/api/stop-sale/${state.currentHotel_Id}/?date=${state.currentDate}`)
         .then((res) => {
-          console.log(res.data);
-          commit("SET_SOURCES", res.data.results);
+          console.log('results',res.data);
+          commit("SET_ROOMS", res.data.results);
           commit("SET_IS_SAVE", false);
         })
         .catch((err) => {
           console.log("Sources", err);
         });
     },
+
+    // async getUserSources({ commit, state }) {
+    //   console.log("store log getUserSources");
+    //   await jwtInterceptor
+    //     .get(`/api/stop-sale/?date=${state.currentDate}`)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       commit("SET_SOURCES", res.data.results);
+    //       commit("SET_IS_SAVE", false);
+    //     })
+    //     .catch((err) => {
+    //       console.log("Sources", err);
+    //     });
+    // },
 
     async checkedDay({ commit }, day) {
       commit("SET_CHECKED_DAY", day);
@@ -217,19 +249,35 @@ export default {
       state.isSave = true;
       console.log("up sources", state.sources);
     },
+    SET_CURRENT_HOTEL_ID(state,hotel_id){
+      state.currentHotel_Id = hotel_id
+    },
     SET_IS_SAVE(state, isSave) {
       state.isSave = isSave;
     },
-    CREATE_SOURCE_DAY(state, newEvent) {
-      for (let index = 0; index < state.sources.length; index++) {
-        const source = state.sources[index];
-        if (source.id === newEvent.source) {
-          state.sources[index].events.push(newEvent);
+    CREATE_ROOM_DAY(state, newEvent) {
+      console.log(newEvent)
+      for (let index = 0; index < state.rooms.length; index++) {
+        const room = state.rooms[index];
+        if (room.id === newEvent.room) {
+          state.rooms[index].events.push(newEvent);
           state.isSave = true;
           break;
         }
       }
+
     },
+    // CREATE_SOURCE_DAY(state, newEvent) {
+
+    //   for (let index = 0; index < state.sources.length; index++) {
+    //     const source = state.sources[index];
+    //     if (source.id === newEvent.source) {
+    //       state.sources[index].events.push(newEvent);
+    //       state.isSave = true;
+    //       break;
+    //     }
+    //   }
+    // },
 
     SET_DATE(state, date) {
       state.date.month = date.month;
@@ -238,6 +286,9 @@ export default {
     },
     SET_CURRENT_DATE(state, newDate) {
       state.currentDate = newDate;
+    },
+    SET_ROOMS(state, payload) {
+      state.rooms = payload;
     },
     SET_SOURCES(state, payload) {
       state.sources = payload;
