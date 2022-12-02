@@ -108,25 +108,25 @@ const routes = [
   {
     path: "/user-profile",
     name: "UserProfile",
-    component: () => import("../components/Connectivity/UserProfile.vue"),
+    component: () => import("../components/connectivity/UserProfile.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/portfolio",
     name: "Portfolio",
-    component: () => import("../components/Connectivity/ViewProfile.vue"),
+    component: () => import("../components/connectivity/ViewProfile.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/user-settings",
-    name: "UserSettings",
-    component: () => import("../components/Settings/Settings.vue"),
+    name: "Usersettings",
+    component: () => import("../components/settings/Settings.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/mailing-lists",
     name: "MailingLists",
-    component: () => import("../components/Connectivity/MailingLists.vue"),
+    component: () => import("../components/connectivity/MailingLists.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
@@ -153,7 +153,7 @@ const routes = [
   {
     path: "/authorized-users",
     name: "Authorizations",
-    component: () => import("../components/Connectivity/AuthorizedUsers.vue"),
+    component: () => import("../components/connectivity/AuthorizedUsers.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
@@ -236,11 +236,11 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   /* End Facts input pages */
-  /* Start Connectivity folder links */
+  /* Start connectivity folder links */
   {
     path: "/addauth-users/:id",
     name: "AddAuthorized",
-    component: () => import("../components/Connectivity/AddAuthUser.vue"),
+    component: () => import("../components/connectivity/AddAuthUser.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
@@ -273,60 +273,60 @@ const routes = [
     component: () => import("../components/accom/PartnersContracts.vue"),
     beforeEnter: ifAuthenticated,
   }, */
-  /* End Connectivity folder links */
+  /* End connectivity folder links */
   /* Start settings folder links */
   {
     path: "/audit-trail",
     name: "AuditTrail",
-    component: () => import("../components/Settings/AuditTrail.vue"),
+    component: () => import("../components/settings/AuditTrail.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/edit-companydetails",
     name: "CompanyDetailsChange",
-    component: () => import("../components/Settings/CompanyDetails.vue"),
+    component: () => import("../components/settings/CompanyDetails.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/edit-layoutsettings",
     name: "LayoutSettingChange",
-    component: () => import("../components/Settings/LayoutDetails.vue"),
+    component: () => import("../components/settings/LayoutDetails.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/edit-mailingdetails",
     name: "MailingSettingChange",
-    component: () => import("../components/Settings/MailingDetails.vue"),
+    component: () => import("../components/settings/MailingDetails.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/edit-notifications",
     name: "NotificationsSettingChange",
-    component: () => import("../components/Settings/NotificationsDetails.vue"),
+    component: () => import("../components/settings/NotificationsDetails.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/edit-paymentdetails",
     name: "PaymentSettingChange",
-    component: () => import("../components/Settings/PaymentDetails.vue"),
+    component: () => import("../components/settings/PaymentDetails.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/subscribe",
     name: "subscribe",
-    component: () => import("../components/Settings/Subscribe.vue"),
+    component: () => import("../components/settings/Subscribe.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/edit-preference",
     name: "PreferenceSettingChange",
-    component: () => import("../components/Settings/Preference.vue"),
+    component: () => import("../components/settings/Preference.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
     path: "/edit-securitysettings",
     name: "SecuritySettingChange",
-    component: () => import("../components/Settings/SecurityDetails.vue"),
+    component: () => import("../components/settings/SecurityDetails.vue"),
     beforeEnter: ifAuthenticated,
   },
   /* End settings folder links */

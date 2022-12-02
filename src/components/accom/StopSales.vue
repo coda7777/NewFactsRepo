@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row>
+    <!-- <b-row>
       <b-col cols="12">
         <div class="container-fluid">
           <h3 class="text-dark mb-1">
@@ -14,7 +14,7 @@
         </div>
       </b-col>
     </b-row>
-    <br />
+    <br /> -->
     <b-card>
       <b-row>
         <b-col
@@ -25,7 +25,11 @@
           <div>
             <h4 style="text-align-last: center">Accommodations</h4>
             <b-list-group v-for="(property, index) in properties" :key="index">
-              <b-list-group-item @click="changeSelectHotel(property.id)" href="#some-link">{{ property.hotelName }}</b-list-group-item>
+              <b-list-group-item @click="changeSelectHotel(property.id)" href="#some-link"
+                 class="d-flex justify-content-between align-items-center">
+                {{ property.hotelName }}
+                <b-spinner v-show="(property.id === getCurrentHotelID && getIsLoading)" small variant="primary" label="Spinning"></b-spinner>
+              </b-list-group-item>
             </b-list-group>
           </div>
           <br />
@@ -266,22 +270,7 @@
     </transition>
   </b-container>
 </template>
-<!-- <script type="text/javascript" charset="utf-8">
-var iframe = document.createElement("iframe");
-document.body.appendChild(iframe);
 
-iframe.src = "http://127.0.0.1:8000/api/facts/property/1/publish/html/";
-iframe.width = "100";
-iframe.height = "100";
-</script>
-<script type="text/javascript" charset="utf-8">
-var iframe = document.createElement("iframe");
-document.body.appendChild(iframe);
-
-iframe.src = "http://127.0.0.1:8000/api/facts/property/1/publish/html/";
-iframe.width = "50%";
-iframe.height = "50%";
-</script> -->
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import Calendar from "../calendar/Calendar.vue";
@@ -308,12 +297,7 @@ export default {
       this.actionGetHotelRooms(this.currentHotel_ID)
     }
   },
-  /* created() {
-    // If another component is already loading the script
-    this.$root.$on("loading_script", (e) => {
-      this.is_script_loading = true;
-    });
-  }, */
+
   async created() {
     await this.getuserlists();
     this.getCompany();
@@ -321,6 +305,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      getIsLoading:'calendar/getIsLoading',
       getCurrentHotelID: "calendar/getCurrentHotelID",
     }),
     /* userLists() {
@@ -356,19 +341,10 @@ export default {
       actionGetHotelRooms: "calendar/getHotelRooms",
     }),
     changeSelectHotel(hotel_id){
+      this.isLoading = true
       this.SET_CURRENT_HOTEL_ID(hotel_id)
     },
-    /* getPartners() {
-      const filtration = {
-        page: 1,
-        data: {
-          countries: this.filterByCountry,
-          role: this.filterByAccountType,
-          status: this.filterByCompanyStatus,
-        },
-      };
-      this.$store.dispatch("partners/retrievePartners", filtration);
-    },*/
+
     async getuserlists() {
       await this.$store
         .dispatch("settings/getMailingLists")
@@ -392,46 +368,7 @@ export default {
         })
         .catch(() => {});
     },
-    // ### Attempt of activating Iframe from the facts jinja file
-    /* load_script() {
-      let self = this;
-      // eslint-disable-next-line no-unused-vars
-      return new Promise((resolve, reject) => {
-        // if script is already loading via another component
-        if (self.is_script_loading) {
-          // Resolve when the other component has loaded the script
-          this.$root.$on("script_loaded", resolve);
-          return;
-        }
 
-        let script = document.createElement("script");
-        script.setAttribute(
-          "src",
-          "//tp.media/content?promo_id=2811&shmarker=253385&campaign_id=100&trs=160975&color_button=%23FF0000&target_host=www.aviasales.com%2Fsearch&locale=en&powered_by=true&airline=&with_fallback=false&non_direct_flights=true&min_lines=5&border_radius=0&color_background=%23FFFFFF&color_text=%23000000&color_border=%23FFFFFF&destination=BKK&origin=LON"
-        );
-        script.async = true;
-
-        this.$root.$emit("loading_script");
-
-        script.onload = () => {
-          // emit to global event bus to inform other components
-           // we are already loading the script
-          this.$root.$emit("script_loaded");
-          resolve();
-        };
-
-        document.head.appendChild(script);
-      });
-    },
-
-    async use_script() {
-      try {
-        await this.load_script();
-        // .. do what you want after script has loaded
-      } catch (err) {
-        console.log(err);
-      }
-    },*/
     newCalendarGroup() {
       this.newCalendar = true;
     },
