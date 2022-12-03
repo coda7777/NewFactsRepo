@@ -49,7 +49,7 @@
             <h4>Group Mailing Option</h4>
             <b-form-select v-model="GroupMailToSend" :select-size="10">
               <option :value="null">Select Group</option>
-              <option v-for="(list, index) in mailingLists" :key="index" :value="list.name">
+              <option v-for="(list, index) in mailingLists" :key="index" :value="list.id">
                 {{ list.name }}
               </option>
             </b-form-select>
@@ -139,7 +139,7 @@
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
     ></iframe> -->
-    <transition name="fade" appear>
+    <!-- <transition name="fade" appear>
       <div v-if="newCalendar">
         <div class="modal-overlay" v-if="newCalendar" @click="newCalendar = false"></div>
         <div class="modal">
@@ -267,7 +267,7 @@
           </div>
         </div>
       </div>
-    </transition>
+    </transition> -->
   </b-container>
 </template>
 
@@ -288,11 +288,15 @@ export default {
       },
       selected: null,
       is_script_loading: false,
-      GroupMailToSend: [],
+      GroupMailToSend: null,
       newCalendar: false,
     };
   },
   watch:{
+    GroupMailToSend(){
+        console.log(this.GroupMailToSend)
+        this.SET_GROUP_MAIL_TO_SEND(this.GroupMailToSend)
+     },
     getCurrentHotelID(){
       this.actionGetHotelRooms(this.currentHotel_ID)
     }
@@ -336,6 +340,7 @@ export default {
   methods: {
     ...mapMutations({
       SET_CURRENT_HOTEL_ID: "calendar/SET_CURRENT_HOTEL_ID",
+      SET_GROUP_MAIL_TO_SEND:'calendar/SET_GROUP_MAIL_TO_SEND'
     }),
     ...mapActions({
       actionGetHotelRooms: "calendar/getHotelRooms",
