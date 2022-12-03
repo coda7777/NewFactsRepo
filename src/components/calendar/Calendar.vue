@@ -4,10 +4,14 @@
    <b-col cols="12" class="row nav justify-content-end">
     <div>
      <a
-      class="btn btn-warning btn-sm d-none d-sm-inline-block"
+      @click="sendPdfViaEmail()"
+      :class="{
+      'btn btn-warning btn-sm d-none d-sm-inline-block': true,
+      disabled: getGroupMailToSend==null,
+     }"
       role="button"
-      href="#"
       style="margin: 4px"
+      disable
      >
       <svg
        xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +120,7 @@
      <div style="margin-left: 15px" v-for="room in getRoomsList" :key="room.id">
       <input
        type="checkbox"
-       v-model="sourcesIds"
+       v-model="roomsIds"
        @click="selectSource"
        :value="room.id"
        style="margin-right: 4px"
@@ -186,7 +190,7 @@ export default {
    color: 1,
    currentTab: "YearView",
    allSelected: false,
-   sourcesIds: [],
+   roomsIds: [],
    sourcesSelected: [],
   };
  },
@@ -206,6 +210,7 @@ export default {
 
  computed: {
   ...mapGetters({
+   getGroupMailToSend: "calendar/getGroupMailToSend",
    getCurrentDate: "calendar/getCurrentDate",
    getterIsSave: "calendar/isSave",
    getRoomsList: "calendar/getRoomsList",
@@ -214,7 +219,7 @@ export default {
   SelectedBoxes() {
    console.log("this.getRoomsLis", this.getRoomsList);
    return this.getRoomsList
-    .filter((room) => this.sourcesIds.includes(room.id))
+    .filter((room) => this.roomsIds.includes(room.id))
     .map((room) => room.room_name);
   },
   currentTabComponent() {
@@ -227,18 +232,23 @@ export default {
    SET_RANGE_SELECTED: "calendar/SET_RANGE_SELECTED",
   }),
   ...mapActions({
+    sendCalendarPdfToGroupSelected: "calendar/sendCalendarPdfToGroupSelected",
    calendarPDFDownload: "calendar/calendarPDFDownload",
    calendarExcelDownload: "calendar/calendarExcelDownload",
    saveRooms: "calendar/saveRooms",
    actionGetHotelRooms: "calendar/getHotelRooms",
   }),
 
+  sendPdfViaEmail(){
+    this.sendCalendarPdfToGroupSelected()
+  },
+
   selectAllSources: function () {
    console.log("select ALLLL");
-   this.sourcesIds = [];
+   this.roomsIds = [];
    if (!this.allSelected) {
     for (let room in this.getRoomsList) {
-     this.sourcesIds.push(this.getRoomsList[room].id);
+     this.roomsIds.push(this.getRoomsList[room].id);
     }
    }
   },
@@ -273,7 +283,7 @@ export default {
 
    const data = {
     events: events,
-    sourcesIds: this.sourcesIds,
+    roomsIds: this.roomsIds,
    };
    console.log("data", data);
    this.SET_RANGE_SELECTED(data);
