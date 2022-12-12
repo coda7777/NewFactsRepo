@@ -110,9 +110,12 @@ export default {
       commit("SET_DATE", date);
     },
 
-    async calendarPDFDownload({ state }) {
+    async calendarPDFDownload({ state },hotel_id=null) {
+      if(hotel_id === null){
+        hotel_id = state.currentHotel_Id
+      }
       await jwtInterceptor
-        .get(`/api/stop-sale/pdf/${state.currentHotel_Id}/?date=${state.currentDate}`)
+        .get(`/api/stop-sale/pdf/${hotel_id}/?date=${state.currentDate}`)
         .then((res) => {
           const url = window.URL.createObjectURL(new Blob([res.data],{ type: "application/pdf" }));
           const link = document.createElement("a");

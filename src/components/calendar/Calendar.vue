@@ -4,7 +4,7 @@
    <b-col cols="12" class="row nav justify-content-end">
     <div>
      <a
-      @click="sendPdfViaEmail()"
+      @click="sendCalendarPdfToGroupSelected()"
       :class="{
       'btn btn-warning btn-sm d-none d-sm-inline-block': true,
       disabled: getGroupMailToSend==null,
@@ -29,7 +29,7 @@
      <a
       class="btn btn-success btn-sm d-none d-sm-inline-block"
       role="button"
-      @click="pdfDownload()"
+      @click="calendarPDFDownload()"
       style="margin: 4px"
      >
       <svg
@@ -239,9 +239,6 @@ export default {
    actionGetHotelRooms: "calendar/getHotelRooms",
   }),
 
-  sendPdfViaEmail(){
-    this.sendCalendarPdfToGroupSelected()
-  },
 
   selectAllSources: function () {
    console.log("select ALLLL");
@@ -292,9 +289,6 @@ export default {
   },
   async excelDownload() {
    await this.calendarExcelDownload();
-  },
-  async pdfDownload() {
-   await this.calendarPDFDownload();
   },
   async save() {
    if (await this.saveRooms()) {

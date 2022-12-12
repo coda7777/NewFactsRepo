@@ -6,7 +6,8 @@
         <label>Email address</label>
         <!-- <input v-model.trim="email" type="email" class="form-control form-control-sm" required /> -->
         <select v-model.trim="email" class="form-control form-control-sm" required>
-          <option value="hotel@gmail.com">hotel@gmail.com</option>
+          <option value="mr@royalsafari.net">Hotel -> mr@royalsafari.net</option>
+          <option value="tui@hotelfacts.net">tour -> tui@hotelfacts.net</option>
           <option value="agence@gmail.com">agence@gmail.com</option>
         </select>
       </div>
@@ -15,8 +16,8 @@
         <!-- <input v-model="password" type="password" class="form-control form-control-sm" required /> -->
         <select v-model="password" class="form-control form-control-sm" required>
           <option value="0" selected>---------------</option>
-          <option value="123">123</option>
           <option value="Azerty@123">Azerty@123</option>
+          <option value="123">123</option>
         </select>
       </div>
       <p v-if="showError" class="text-danger">
