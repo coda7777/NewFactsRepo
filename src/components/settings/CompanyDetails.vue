@@ -34,84 +34,207 @@
                 data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
                 >Company's Legal Name</label
               >
-              <div class="col-sm-5">
+              <div class="col-sm-3">
                 <input type="text" class="form-control form-control-sm" v-model="company.company" />
               </div>
             </div>
-            <div class="form-group row">
-              <label
-                for="country-name"
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >Country</label
-              >
-              <div class="col-sm-3">
-                <span v-if="loadCountry" class="input-group-addon">
-                  <i class="spinner-border spinner-border"></i>
-                </span>
-                <select
-                  id="country-name"
-                  type="text"
-                  class="form-control form-control-sm"
-                  required
-                  v-model="company.country"
-                  @change="getStates()"
-                >
-                  <option value="null" selected>--Select Country--</option>
-                  <option v-for="(k, index) in countries" :key="index" :value="k.iso2">
-                    {{ k.name }}
-                  </option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="country-name"
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >State</label
-              >
-              <div class="col-sm-3">
-                <span v-if="loadCountry" class="input-group-addon">
-                  <i class="spinner-border spinner-border"></i>
-                </span>
-                <select
-                  id="state-name"
-                  type="text"
-                  class="form-control"
-                  required
-                  v-model="company.state"
-                  @change="getCities()"
-                >
-                  <option value="null" selected>--Select State--</option>
-                  <option v-for="(s, index) in states" :key="index" :value="s.iso2">
-                    {{ s.name }}
-                  </option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="country-name"
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >City</label
-              >
-              <div class="col-sm-3">
-                <span v-if="loadCountry" class="input-group-addon">
-                  <i class="spinner-border spinner-border"></i>
-                </span>
-                <select id="city-name" type="text" class="form-control" v-model="company.city">
-                  <option value="null" selected>--Select City--</option>
-                  <option v-for="(c, index) in cities" :key="index" :value="c.name">
-                    {{ c.name }}
-                  </option>
-                </select>
-              </div>
-            </div>
+            <b-row class="row">
+              <b-col cols="12" id="disabled-geolocation">
+                <div class="form-group row">
+                  <label
+                    class="control-label col-sm-2"
+                    data-toggle="tooltip"
+                    data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+                    >Location</label
+                  >
+                  <div class="col-sm-1">
+                    <input
+                      disabled
+                      type="text"
+                      class="form-control form-control-sm"
+                      v-model="company.country"
+                    />
+                  </div>
+
+                  <div class="col-sm-1">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      v-model="company.state"
+                      disabled
+                    />
+                  </div>
+
+                  <div class="col-sm-1">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      v-model="company.city"
+                      disabled
+                    />
+                  </div>
+                  <div class="col-sm-2">
+                    <b-button size="sm" variant="warning" @click="showEdit()"
+                      >Change Location</b-button
+                    >
+                  </div>
+                </div>
+                <!--                 <div class="form-group row">
+                  <label
+                    class="control-label col-sm-2"
+                    data-toggle="tooltip"
+                    data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+                    >Country</label
+                  >
+                  <div class="col-sm-2">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      v-model="company.country"
+                    />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label
+                    class="control-label col-sm-2"
+                    data-toggle="tooltip"
+                    data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+                    >State</label
+                  >
+                  <div class="col-sm-2">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      v-model="company.state"
+                    />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label
+                    class="control-label col-sm-2"
+                    data-toggle="tooltip"
+                    data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+                    >City</label
+                  >
+                  <div class="col-sm-2">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      v-model="company.city"
+                    />
+                  </div>
+                </div> -->
+              </b-col>
+              <transition name="fade" appear>
+                <div class="modal-overlay" v-if="changeloc">
+                  <div class="modal">
+                    <header class="modalheader">
+                      <h5>Choose Location</h5>
+                    </header>
+                    <div class="modalcontainer">
+                      <form v-on:submit.prevent @submit="save()">
+                        <div id="change-location">
+                          <div class="form-group row">
+                            <label
+                              for="country-name"
+                              class="control-label col-sm-3"
+                              data-toggle="tooltip"
+                              data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+                              >Country</label
+                            >
+                            <div class="col-sm-6">
+                              <span v-if="loadCountry" class="input-group-addon">
+                                <i class="spinner-border spinner-border"></i>
+                              </span>
+                              <select
+                                id="country-name"
+                                type="text"
+                                class="form-control"
+                                required
+                                v-model="company.country"
+                                @change="getStates()"
+                              >
+                                <option value="null" selected>--Select Country--</option>
+                                <option
+                                  v-for="(k, index) in countries"
+                                  :key="index"
+                                  :value="k.iso2"
+                                >
+                                  {{ k.name }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label
+                              for="country-name"
+                              class="control-label col-sm-3"
+                              data-toggle="tooltip"
+                              data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+                              >State</label
+                            >
+                            <div class="col-sm-6">
+                              <span v-if="loadState" class="input-group-addon">
+                                <i class="spinner-border spinner-border"></i>
+                              </span>
+                              <select
+                                id="state-name"
+                                type="text"
+                                class="form-control"
+                                required
+                                v-model="company.state"
+                                @change="getCities()"
+                              >
+                                <option value="null" selected>--Select State--</option>
+                                <option v-for="(s, index) in states" :key="index" :value="s.iso2">
+                                  {{ s.name }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label
+                              for="country-name"
+                              class="control-label col-sm-3"
+                              data-toggle="tooltip"
+                              data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+                              >City</label
+                            >
+                            <div class="col-sm-6">
+                              <span v-if="loadCity" class="input-group-addon">
+                                <i class="spinner-border spinner-border"></i>
+                              </span>
+                              <select
+                                id="city-name"
+                                type="text"
+                                class="form-control"
+                                v-model="company.city"
+                              >
+                                <option value="null" selected>--Select City--</option>
+                                <option v-for="(c, index) in cities" :key="index" :value="c.name">
+                                  {{ c.name }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <b-button type="submit" variant="outline-success" class="modalbutton"
+                          >Save</b-button
+                        >
+                        <b-button
+                          type="button"
+                          variant="outline-danger"
+                          class="modalbutton"
+                          @click="cancel()"
+                          >Cancel</b-button
+                        >
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </transition>
+            </b-row>
+
             <div class="form-group row">
               <label
                 class="control-label col-sm-2"
@@ -469,6 +592,10 @@ export default {
       file1: null,
       company: {},
       workInCountries: this.workInCountries || [],
+      loadCountry: false,
+      loadState: false,
+      loadCity: false,
+      changeloc: false,
     };
   },
   computed: {
@@ -483,7 +610,8 @@ export default {
     },
   },
   async created() {
-    this.company = this.$store.getters["settings/getCompany"];
+    this.company = await this.$store.getters["settings/getCompany"];
+    /* console.log("this.company ", this.company); */
     await this.getCountries();
     if (!this.company.user > 0) {
       this.getCompany();
@@ -498,7 +626,7 @@ export default {
       });
     },
     async getStates() {
-      const countryCode = this.propertyToEdit.country;
+      const countryCode = this.company.country;
       this.loadState = true;
       this.loadCity = true;
       await this.$store.dispatch("countries/retrieveStates", countryCode).then(() => {
@@ -507,8 +635,8 @@ export default {
       });
     },
     async getCities() {
-      const countryCode = this.propertyToEdit.country;
-      const stateCode = this.propertyToEdit.state;
+      const countryCode = this.company.country;
+      const stateCode = this.company.state;
       this.loadCity = true;
       await this.$store
         .dispatch("countries/retrieveCities", {
@@ -527,13 +655,23 @@ export default {
         .dispatch("settings/retrieveCompany")
         // eslint-disable-next-line no-unused-vars
         .then((response) => {
-          /* console.log(response); */
+          /* console.log("getter response ", response); */
           this.company = this.$store.getters["settings/getCompany"];
         })
         // eslint-disable-next-line no-unused-vars
         .catch((error) => {
-          /* console.log(error); */
+          console.log(error);
         });
+    },
+    showEdit() {
+      this.locationToEdit = {
+        country: this.company.country,
+        state: this.company.state,
+        city: this.company.city,
+      };
+      this.getStates();
+      this.getCities();
+      this.changeloc = true;
     },
     async save() {
       const formData = new FormData();
@@ -545,7 +683,9 @@ export default {
         this.company.website = `https://${this.company.website}`;
       }
       formData.append("company", this.company.company);
+      console.log(this.company.company);
       formData.append("website", this.company.website);
+      console.log(this.company.website);
       formData.append("address", this.company.address);
       formData.append("contact_number", this.company.contactNumber);
       formData.append("country", this.company.country);
@@ -554,12 +694,17 @@ export default {
       formData.append("description", this.company.description);
       formData.append("about_us", this.company.aboutUs);
       formData.append("work_in_countries", this.company.workInCountries);
-      formData.append("facebook", this.company.facebook);
-      formData.append("instagram", this.company.instagram);
+      formData.append("facebook", `https://facebook.com/${this.company.facebook}`);
+      formData.append("instagram", `https://instagram.com/${this.company.instagram}`);
+      formData.append("linkedIn", `https://linkedIn.com/${this.company.linkedIn}`);
+      formData.append("trustpilot", `https://trustpilot.com/${this.company.trustpilot}`);
+      formData.append("trip_advisor", `https://trip_advisor.com/${this.company.tripAdvisor}`);
+      /* formData.append("instagram", this.company.instagram);
       formData.append("linkedIn", this.company.linkedIn);
       formData.append("trustpilot", this.company.trustpilot);
-      formData.append("trip_advisor", this.company.tripAdvisor);
+      formData.append("trip_advisor", this.company.tripAdvisor); */
       formData.append("user", this.company.user);
+      console.log(formData);
       if (this.file1) {
         formData.append("logo", this.file1);
       }
