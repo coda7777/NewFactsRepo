@@ -262,7 +262,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -308,32 +308,26 @@ export default {
     }
   },
   computed: {
-    countries() {
-      return this.$store.getters["countries/getCountries"];
-    },
-    mailingLists() {
-      return this.$store.getters["settings/getMailingLists"];
-    },
-    properties() {
-      return this.$store.getters["property/getProperties"];
-    },
-    isAuthenticated() {
-      return this.$store.getters["user/isAuthenticated"];
-    },
+    ...mapGetters({
+        isAuthenticated:'user/isAuthenticated',
+        properties:'property/getProperties',
+        countries:'countries/getCountries',
+        mailingLists:'settings/getMailingLists',
+        partners:'partners/getPartners',
+    }),
+
     companyLogos() {
       if (this.galleryFilter === "all") {
         return this.images;
       }
       return this.images.filter((image) => image.filter === this.galleryFilter);
     },
-    partners() {
-      return this.$store.getters["partners/getPartners"];
-    },
   },
   async created() {
     await this.getMailingLists();
     await this.getCountries();
-    await this.getProperties();
+    await this.actionGetProperties();
+    // await this.getProperties();
     this.getCompany();
     this.getPartners();
   },
@@ -347,6 +341,7 @@ export default {
       calendarPDFDownload: "calendar/calendarPDFDownload",
       factSheetPDFDownload: "exportCenter/factSheetPDFDownload",
       sendFactSheetPDFToGroupSelected: "exportCenter/sendFactSheetPDFToGroupSelected",
+      actionGetProperties:'property/getInfo'
     }),
 
     getPartners() {
