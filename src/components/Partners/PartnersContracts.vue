@@ -113,11 +113,7 @@
                     <h5 style="color: #000">
                       {{ partner.company || partner.email }}
                     </h5>
-                    <img
-                      :src="thumbnailDir + partner.logo"
-                      :alt="partner.company"
-                      :title="partner.company"
-                    />
+                    <img :src="partner.logo" :alt="partner.company" :title="partner.company" />
                     <br />
                     <div class="row">
                       <p><b>Location:</b> {{ partner.address }}</p>
@@ -152,7 +148,7 @@
               </transition-group>
               <!-- enter modal -->
 
-              <lightbox
+              <!--               <lightbox
                 id="mylightbox"
                 ref="lightbox"
                 :images="images"
@@ -160,7 +156,7 @@
                 :filter="galleryFilter"
                 :timeout-duration="5000"
                 :close-on-backdrop-click="true"
-              />
+              /> -->
             </div>
           </b-col>
         </b-row>
@@ -234,22 +230,26 @@
           <table class="table table-hover">
             <thead class="GFS-TNave">
               <tr>
-                <th scope="col">Title</th>
-                <th scope="col">creation date</th>
-                <th scope="col">last modification</th>
-                <th scope="col">country</th>
-                <th scope="col">Type</th>
-                <th scope="col">Status</th>
-                <th scope="col">Comments</th>
-                <th scope="col"></th>
+                <th scope="col">Logo</th>
+                <td scope="col">company</td>
+                <td scope="col">creation date</td>
+                <td scope="col">last modification</td>
+                <td scope="col">country</td>
+                <td scope="col">Type</td>
+                <td scope="col">Status</td>
+                <td></td>
               </tr>
             </thead>
             <tbody>
-              <div>
-                {{ filteredContracts.results }}
-              </div>
               <tr v-for="(c, index) in filteredContracts.results" :key="index">
-                <th scope="row">{{ c.partner_info.email }}</th>
+                <td>
+                  <img
+                    :src="c.partner_info.company.logo"
+                    :alt="c.partner_info.company.company"
+                    style="max-width: 40px"
+                  />
+                </td>
+                <td>{{ c.partner_info.company.company }}</td>
                 <td>{{ parseDate(c.date_created) }}</td>
                 <td>{{ parseDate(c.date_update) }}</td>
                 <td>{{ c.partner_info.country }}</td>
@@ -768,13 +768,13 @@
 <script>
 // import axios from 'axios';
 // @TODO: change dir to dcn
-const photoDir = "http://127.0.0.1:8000";
+//const photoDir = "http://127.0.0.1:8000";
 
 export default {
   data() {
     return {
       miniProfileModal: false,
-      thumbnailDir: photoDir,
+      // thumbnailDir: photoDir,
       companyIsPartner: true,
       companyIsPending: true,
       incomingContract: true,
@@ -840,6 +840,7 @@ export default {
     await this.getCountries();
     this.getCompany();
     this.getPartners();
+    this.filterContracts();
   },
   methods: {
     parseDate(inputDate) {
@@ -859,6 +860,7 @@ export default {
       this.$store.dispatch("partners/retrievePartners", filtration);
     },
     filterContracts(contractType) {
+      /* console.log("contract type", contractType); */
       const filtration = {
         page: 1,
         data: {
@@ -867,7 +869,12 @@ export default {
           status: this.myContracts.filterByCompanyStatus,
         },
       };
+      /* console.log("filteration data", filtration); */
       this.$store.dispatch("partners/retrieveContracts", filtration);
+      /*         .then(() => {
+          this.company = this.$store.getters["partners/getContracts"];
+        })
+        .catch(() => {}); */
     },
     async getCountries() {
       await this.$store.dispatch("countries/retrieveCountries");

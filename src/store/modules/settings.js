@@ -54,17 +54,17 @@ export default {
       state.company.address = newCompany.address;
       state.company.contactNumber = newCompany.contact_number;
       state.company.logo = newCompany.logo ? newCompany.logo : null;
-      state.company.country = newCompany.country;
-      state.company.state = newCompany.state;
-      state.company.city = newCompany.city;
+      state.company.country = newCompany.country ? newCompany.country : "";
+      state.company.state = newCompany.state ? newCompany.state : "";
+      state.company.city = newCompany.city ? newCompany.city : "";
       state.company.description = newCompany.description;
       state.company.aboutUs = newCompany.about_us;
       state.company.workInCountries = newCompany.work_in_countries;
-      state.company.facebook = newCompany.facebook;
-      state.company.instagram = newCompany.instagram;
-      state.company.linkedIn = newCompany.linked_in;
-      state.company.trustpilot = newCompany.trustpilot;
-      state.company.tripAdvisor = newCompany.trip_advisor;
+      state.company.facebook = newCompany.facebook ? newCompany.facebook : null;
+      state.company.instagram = newCompany.instagram ? newCompany.instagram : null;
+      state.company.linkedIn = newCompany.linked_in ? newCompany.linked_in : null;
+      state.company.trustpilot = newCompany.trustpilot ? newCompany.trustpilot : null;
+      state.company.tripAdvisor = newCompany.trip_advisor ? newCompany.trip_advisor : null;
       state.company.user = newCompany.user;
     },
     updatePreferences(state, newPreferences) {
