@@ -111,9 +111,14 @@
                 >
                   <b-card @click="makeContract(partner)" style="cursor: pointer">
                     <h5 style="color: #000">
-                      {{ partner.company || partner.email }}
+                      {{ partner.company || partner.email.split("@")[1] }}
                     </h5>
-                    <img :src="partner.logo" :alt="partner.company" :title="partner.company" />
+                    <img
+                      style="max-width: 50%; height: auto; margin: 0px 0px 30px 0px"
+                      :src="partner.logo"
+                      :alt="partner.company"
+                      :title="partner.company"
+                    />
                     <br />
                     <div class="row">
                       <p><b>Location:</b> {{ partner.address }}</p>
