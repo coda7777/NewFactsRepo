@@ -88,7 +88,7 @@
                   variant="outline-dark"
                   text="Filter by role"
                   class="form-control-sm"
-                  v-model="discover.filterByCompanyStatus"
+                  v-model="myContracts.filterByCompanyStatus"
                 >
                   <option value="">All Status</option>
                   <option v-for="(c, index) in contractStatus" :key="index" :value="c.value">
@@ -124,8 +124,7 @@
                     <div class="row">
                       <p><b>Account Type:</b> {{ partner.accountType }}</p>
                     </div>
-                    <div class="row" v-if="partner.accountType === 'to'">
-                    <!-- <div class="row" v-if="partner.accountType === 'Tour operator'"> -->
+                    <div class="row" v-if="partner.accountType === 'tour operator'">
                       <b>Sells in:</b>
                       <p>Places where Operator is focusing sale</p>
                     </div>
@@ -719,7 +718,8 @@
                                   <path
                                     d="M9.35107 8.99742H12.7648V10.5632H12.8137C13.288 9.66173 14.4491 8.71326 16.1842 8.71326C19.7899 8.71326 20.4542 11.0844 20.4542 14.1707V20.4525H16.8937V14.8821C16.8937 13.5535 16.8692 11.8447 15.0438 11.8447C13.2184 11.8447 12.9078 13.2919 12.9078 14.7861V20.4506H9.35107V8.99742Z"
                                     fill="white"
-                                  ></path></svg></a>
+                                  ></path></svg
+                              ></a>
                             </div></div
                         ></b-col>
                       </b-row>
@@ -766,7 +766,6 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
 // import axios from 'axios';
 // @TODO: change dir to dcn
 //const photoDir = "http://127.0.0.1:8000";
@@ -812,7 +811,7 @@ export default {
       options: [
         { value: "", text: "Filter by role" },
         { value: "accommodation", text: "Accommodation" },
-        { value: "to", text: "Tour Operator" },
+        { value: "tour operator", text: "Tour Operator" },
         { value: "3rd party", text: "3rd party" },
       ],
     };
@@ -844,9 +843,6 @@ export default {
     this.filterContracts();
   },
   methods: {
-    ...mapActions({
-      retrievePartners:'partners/retrievePartners',
-    }),
     parseDate(inputDate) {
       const d = new Date(inputDate);
       const resultDate = `${d.getUTCFullYear()}-${d.getUTCMonth() + 1}-${d.getUTCDate()}`;
@@ -861,8 +857,7 @@ export default {
           status: this.discover.filterByCompanyStatus,
         },
       };
-      this.retrievePartners(filtration)
-      // this.$store.dispatch("partners/retrievePartners", filtration);
+      this.$store.dispatch("partners/retrievePartners", filtration);
     },
     filterContracts(contractType) {
       /* console.log("contract type", contractType); */

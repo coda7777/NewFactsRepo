@@ -1,4 +1,5 @@
 import jwtInterceptor from "./jwtInterceptor";
+// eslint-disable-next-line no-unused-vars
 import excelJwtInterceptor from "./excelJwtInterceptor";
 
 ///api/stop-sale/
@@ -47,13 +48,13 @@ export default {
   },
   getters: {
     getGroupMailToSend(state) {
-      return state.GroupMailToSend
+      return state.GroupMailToSend;
     },
     getIsLoading(state) {
-      return state.isLoading
+      return state.isLoading;
     },
     getCurrentHotelID(state) {
-      return state.currentHotel_Id
+      return state.currentHotel_Id;
     },
     getCalendarGroups(state) {
       return state.calendarGroups;
@@ -90,9 +91,12 @@ export default {
   actions: {
     async sendCalendarPdfToGroupSelected({ state }) {
       await jwtInterceptor
-        .get(`/api/stop-sale/pdf/${state.currentHotel_Id}/send-mail/${state.GroupMailToSend}/?date=${state.currentDate}`)
+        .get(
+          `/api/stop-sale/pdf/${state.currentHotel_Id}/send-mail/${state.GroupMailToSend}/?date=${state.currentDate}`
+        )
         .then((res) => {
-          commit('SET_GROUP_MAIL_TO_SEND', null)
+          console.log("sendCalendarPdfToGroupSelected LOG", res);
+          commit("SET_GROUP_MAIL_TO_SEND", null);
         });
     },
     async getCalendarGroups({ context }) {
@@ -112,11 +116,10 @@ export default {
 
     async calendarPDFDownload({ state }, hotel_id = null) {
       if (hotel_id === null) {
-        hotel_id = state.currentHotel_Id
+        hotel_id = state.currentHotel_Id;
       }
       await jwtInterceptor
-        .get(`/api/stop-sale/pdf/${hotel_id}/`)
-        // .get(`/api/stop-sale/pdf/${hotel_id}/?date=${state.currentDate}`)
+        .get(`/api/stop-sale/pdf/${hotel_id}/?date=${state.currentDate}`)
         .then((res) => {
           const url = window.URL.createObjectURL(new Blob([res.data], { type: "application/pdf" }));
           const link = document.createElement("a");
@@ -151,6 +154,18 @@ export default {
       }
     },
 
+    // async saveSources({ state }) {
+    //   try {
+    //     await jwtInterceptor.post("/api/stop-sale/save/", {
+    //       data: { sources: state.sources, date: state.currentDate },
+    //     });
+
+    //     // commit('SAVE_SOURCES',res.data)
+    //     return true;
+    //   } catch (err) {
+    //     console.log("Error To create source", err.response.data);
+    //   }
+    // },
 
     async loadSourceForMonth({ commit }, caldata) {
       await jwtInterceptor
@@ -163,7 +178,6 @@ export default {
         });
     },
 
-
     async getHotelRooms({ commit, state }, hotel_id) {
       commit("SET_IS_LOADING", true);
       await jwtInterceptor
@@ -172,13 +186,11 @@ export default {
           commit("SET_IS_LOADING", false);
           commit("SET_ROOMS", res.data.results);
           commit("SET_IS_SAVE", false);
-
         })
         .catch((err) => {
           console.log("Rooms", err);
         });
     },
-
 
     async checkedDay({ commit }, day) {
       commit("SET_CHECKED_DAY", day);
@@ -250,11 +262,11 @@ export default {
       state.isSave = true;
     },
     SET_GROUP_MAIL_TO_SEND(state, group_mail_to_send) {
-      state.GroupMailToSend = group_mail_to_send
-      console.log('group', state.GroupMailToSend)
+      state.GroupMailToSend = group_mail_to_send;
+      console.log("group", state.GroupMailToSend);
     },
     SET_CURRENT_HOTEL_ID(state, hotel_id) {
-      state.currentHotel_Id = hotel_id
+      state.currentHotel_Id = hotel_id;
     },
     SET_IS_LOADING(state, isLoading) {
       state.isLoading = isLoading;
@@ -271,7 +283,6 @@ export default {
           break;
         }
       }
-
     },
 
     SET_DATE(state, date) {

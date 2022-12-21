@@ -202,7 +202,7 @@ export default {
           url: "http://127.0.0.1:8000/api/facts/properties/",
         })
           .then((response) => {
-            const retrievedProperties = response.data.results || [];
+            const retrievedProperties = response.data || [];
             /* console.log("retrieved properties are:", retrievedProperties); */
             context.commit("updateProperties", retrievedProperties);
             resolve(retrievedProperties);

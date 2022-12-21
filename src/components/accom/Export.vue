@@ -118,11 +118,10 @@
                     <div class="justify-content">
                       <b-dropdown variant="warning" text="Facts Sheet" class="m-md-2">
                         <b-dropdown-item @click="sendFactSheetPDFToGroupSelected(property.id)"
-                          >Send Mail</b-dropdown-item
+                          >Send via E-Mail</b-dropdown-item
                         >
-                        <b-dropdown-item>Contracted</b-dropdown-item>
                         <b-dropdown-item @click="factSheetPDFDownload(property.id)"
-                          >Download</b-dropdown-item
+                          >Download File</b-dropdown-item
                         >
                         <b-dropdown-item></b-dropdown-item>
                       </b-dropdown>
@@ -136,10 +135,11 @@
                       </b-button>
                       &nbsp;&nbsp;
                       <b-dropdown variant="warning" text="Stop Sale" class="m-md-2">
-                        <b-dropdown-item>Default</b-dropdown-item>
-                        <b-dropdown-item>Contracted</b-dropdown-item>
+                        <b-dropdown-item @click="sendCalendarPdfToGroupSelected()"
+                          >Send via E-Mail</b-dropdown-item
+                        >
                         <b-dropdown-item @click="calendarPDFDownload(property.id)"
-                          >Calendar</b-dropdown-item
+                          >Download File</b-dropdown-item
                         >
                         <b-dropdown-item></b-dropdown-item>
                       </b-dropdown>
@@ -268,7 +268,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -315,11 +315,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-        isAuthenticated:'user/isAuthenticated',
-        properties:'property/getProperties',
-        countries:'countries/getCountries',
-        mailingLists:'settings/getMailingLists',
-        partners:'partners/getPartners',
+      isAuthenticated: "user/isAuthenticated",
+      properties: "property/getProperties",
+      countries: "countries/getCountries",
+      mailingLists: "settings/getMailingLists",
+      partners: "partners/getPartners",
     }),
 
     companyLogos() {
@@ -328,12 +328,15 @@ export default {
       }
       return this.images.filter((image) => image.filter === this.galleryFilter);
     },
+    /*     partners() {
+      return this.$store.getters["partners/getPartners"];
+    }, */
   },
   async created() {
     await this.getMailingLists();
     await this.getCountries();
-    await this.actionGetProperties();
-    // await this.getProperties();
+    //await this.actionGetProperties();
+    await this.getProperties();
     this.getCompany();
     this.getPartners();
   },
@@ -343,11 +346,12 @@ export default {
       SET_GROUP_MAIL_TO_SEND: "exportCenter/SET_GROUP_MAIL_TO_SEND",
     }),
     ...mapActions({
+      sendCalendarPdfToGroupSelected: "calendar/sendCalendarPdfToGroupSelected",
       getMailingLists: "settings/getMailingLists",
       calendarPDFDownload: "calendar/calendarPDFDownload",
       factSheetPDFDownload: "exportCenter/factSheetPDFDownload",
       sendFactSheetPDFToGroupSelected: "exportCenter/sendFactSheetPDFToGroupSelected",
-      actionGetProperties:'property/getInfo'
+      actionGetProperties: "property/getProperties",
     }),
 
     getPartners() {
