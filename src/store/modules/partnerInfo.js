@@ -83,6 +83,7 @@ export default {
     updatePartnerToContract(context, partnerData) {
       context.commit("updatePartnerToContract", partnerData);
     },
+
     retrievePartners(context, filtrations) {
       console.log("my filtrations:", filtrations);
       return new Promise((resolve, reject) => {

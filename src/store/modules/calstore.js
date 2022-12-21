@@ -6,7 +6,7 @@ import excelJwtInterceptor from "./excelJwtInterceptor";
 export default {
   namespaced: true,
   state: {
-    GroupMailToSend:1,
+    GroupMailToSend: 1,
     isSave: false,
     date: {
       date: null,
@@ -39,20 +39,20 @@ export default {
       "December",
     ],
     // sources: [],
-    rooms:[],
-    currentHotel_Id:1,
+    rooms: [],
+    currentHotel_Id: 1,
     currentDate: "",
     calendarGroups: ["Contracted"],
-    isLoading:false,
+    isLoading: false,
   },
   getters: {
-    getGroupMailToSend(state){
+    getGroupMailToSend(state) {
       return state.GroupMailToSend
     },
-    getIsLoading(state){
+    getIsLoading(state) {
       return state.isLoading
     },
-    getCurrentHotelID(state){
+    getCurrentHotelID(state) {
       return state.currentHotel_Id
     },
     getCalendarGroups(state) {
@@ -88,11 +88,11 @@ export default {
     // },
   },
   actions: {
-    async sendCalendarPdfToGroupSelected({state}){
+    async sendCalendarPdfToGroupSelected({ state }) {
       await jwtInterceptor
         .get(`/api/stop-sale/pdf/${state.currentHotel_Id}/send-mail/${state.GroupMailToSend}/?date=${state.currentDate}`)
         .then((res) => {
-          commit('SET_GROUP_MAIL_TO_SEND',null)
+          commit('SET_GROUP_MAIL_TO_SEND', null)
         });
     },
     async getCalendarGroups({ context }) {
@@ -110,14 +110,15 @@ export default {
       commit("SET_DATE", date);
     },
 
-    async calendarPDFDownload({ state },hotel_id=null) {
-      if(hotel_id === null){
+    async calendarPDFDownload({ state }, hotel_id = null) {
+      if (hotel_id === null) {
         hotel_id = state.currentHotel_Id
       }
       await jwtInterceptor
-        .get(`/api/stop-sale/pdf/${hotel_id}/?date=${state.currentDate}`)
+        .get(`/api/stop-sale/pdf/${hotel_id}/`)
+        // .get(`/api/stop-sale/pdf/${hotel_id}/?date=${state.currentDate}`)
         .then((res) => {
-          const url = window.URL.createObjectURL(new Blob([res.data],{ type: "application/pdf" }));
+          const url = window.URL.createObjectURL(new Blob([res.data], { type: "application/pdf" }));
           const link = document.createElement("a");
           link.href = url;
           link.setAttribute("download", `pdf.pdf`);
@@ -139,7 +140,7 @@ export default {
     //     });
     // },
 
-    async saveRooms({state}){
+    async saveRooms({ state }) {
       try {
         await jwtInterceptor.post("/api/stop-sale/save/", {
           data: { rooms: state.rooms, date: state.currentDate },
@@ -150,18 +151,6 @@ export default {
       }
     },
 
-    // async saveSources({ state }) {
-    //   try {
-    //     await jwtInterceptor.post("/api/stop-sale/save/", {
-    //       data: { sources: state.sources, date: state.currentDate },
-    //     });
-
-    //     // commit('SAVE_SOURCES',res.data)
-    //     return true;
-    //   } catch (err) {
-    //     console.log("Error To create source", err.response.data);
-    //   }
-    // },
 
     async loadSourceForMonth({ commit }, caldata) {
       await jwtInterceptor
@@ -175,7 +164,7 @@ export default {
     },
 
 
-    async getHotelRooms({ commit, state },hotel_id) {
+    async getHotelRooms({ commit, state }, hotel_id) {
       commit("SET_IS_LOADING", true);
       await jwtInterceptor
         .get(`/api/stop-sale/${state.currentHotel_Id}/?date=${state.currentDate}`)
@@ -260,11 +249,11 @@ export default {
       }
       state.isSave = true;
     },
-    SET_GROUP_MAIL_TO_SEND(state,group_mail_to_send){
-        state.GroupMailToSend = group_mail_to_send
-        console.log('group',state.GroupMailToSend)
+    SET_GROUP_MAIL_TO_SEND(state, group_mail_to_send) {
+      state.GroupMailToSend = group_mail_to_send
+      console.log('group', state.GroupMailToSend)
     },
-    SET_CURRENT_HOTEL_ID(state,hotel_id){
+    SET_CURRENT_HOTEL_ID(state, hotel_id) {
       state.currentHotel_Id = hotel_id
     },
     SET_IS_LOADING(state, isLoading) {
