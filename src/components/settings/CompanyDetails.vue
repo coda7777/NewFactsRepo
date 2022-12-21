@@ -28,10 +28,7 @@
         <form @submit.prevent="save()" class="form-horizontal">
           <fieldset>
             <div class="form-group row">
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+              <label class="control-label col-sm-2" data-toggle="tooltip"
                 >Company's Legal Name</label
               >
               <div class="col-sm-3">
@@ -41,12 +38,7 @@
             <b-row class="row">
               <b-col cols="12" id="disabled-geolocation">
                 <div class="form-group row">
-                  <label
-                    class="control-label col-sm-2"
-                    data-toggle="tooltip"
-                    data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                    >Location</label
-                  >
+                  <label class="control-label col-sm-2" data-toggle="tooltip">Location</label>
                   <div class="col-sm-1">
                     <input
                       disabled
@@ -83,7 +75,7 @@
                   <label
                     class="control-label col-sm-2"
                     data-toggle="tooltip"
-                    data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+                    
                     >Country</label
                   >
                   <div class="col-sm-2">
@@ -98,7 +90,7 @@
                   <label
                     class="control-label col-sm-2"
                     data-toggle="tooltip"
-                    data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+                    
                     >State</label
                   >
                   <div class="col-sm-2">
@@ -113,7 +105,7 @@
                   <label
                     class="control-label col-sm-2"
                     data-toggle="tooltip"
-                    data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
+                    
                     >City</label
                   >
                   <div class="col-sm-2">
@@ -139,7 +131,6 @@
                               for="country-name"
                               class="control-label col-sm-3"
                               data-toggle="tooltip"
-                              data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
                               >Country</label
                             >
                             <div class="col-sm-6">
@@ -170,7 +161,6 @@
                               for="country-name"
                               class="control-label col-sm-3"
                               data-toggle="tooltip"
-                              data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
                               >State</label
                             >
                             <div class="col-sm-6">
@@ -197,7 +187,6 @@
                               for="country-name"
                               class="control-label col-sm-3"
                               data-toggle="tooltip"
-                              data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
                               >City</label
                             >
                             <div class="col-sm-6">
@@ -236,23 +225,13 @@
             </b-row>
 
             <div class="form-group row">
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >Address</label
-              >
+              <label class="control-label col-sm-2" data-toggle="tooltip">Address</label>
               <div class="col-sm-5">
                 <input type="text" class="form-control form-control-sm" v-model="company.address" />
               </div>
             </div>
             <div class="form-group row">
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >Contect Number</label
-              >
+              <label class="control-label col-sm-2" data-toggle="tooltip">Contect Number</label>
               <div class="col-sm-3">
                 <input
                   type="text"
@@ -262,12 +241,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >Website</label
-              >
+              <label class="control-label col-sm-2" data-toggle="tooltip">Website</label>
               <div class="col-sm-4">
                 <b-input-group size="sm" style="width: 400px" prepend="https://">
                   <b-form-input v-model="company.website"></b-form-input>
@@ -296,12 +270,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >Short Description</label
-              >
+              <label class="control-label col-sm-2" data-toggle="tooltip">Short Description</label>
               <div class="col-sm-5">
                 <input
                   type="text"
@@ -311,12 +280,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >About Us</label
-              >
+              <label class="control-label col-sm-2" data-toggle="tooltip">About Us</label>
               <div class="col-sm-5">
                 <b-form-textarea
                   v-model="company.aboutUs"
@@ -327,52 +291,51 @@
                 </b-form-textarea>
               </div>
             </div>
-            <b-col cols="6">
-              <div class="form-group row">
-                <label class="col-sm-5 col-form-label col-form-label-sm"
-                  >Location Environment Type</label
+            <br />
+            <div class="form-group row">
+              <label class="control-label col-sm-2" data-toggle="tooltip"
+                >Location Environment Type</label
+              >
+              <div class="col">
+                <b-dropdown
+                  size="md"
+                  boundary="viewport"
+                  variant="outline-dark"
+                  :text="company.workInCountries ? company.workInCountries : 'Select countries'"
+                  class="m-md-6"
+                  style="max-width: 650px !important; font-weight: 600"
                 >
-                <div class="col">
-                  <b-dropdown
-                    size="sm"
-                    boundary="viewport"
-                    variant="outline-dark"
-                    :text="company.workInCountries + ' Selected options'"
-                    class="m-md-2"
-                    style="max-width: 350px !important; font-weight: 600"
-                  >
-                    <b-card class="bcardmultidrop">
-                      <div>
-                        <b-badge
-                          class="multidropbadge"
-                          v-for="(k, index) in company.workInCountries"
-                          :key="index"
-                          pill
-                          variant="success"
-                        >
-                          {{ k }}
-                        </b-badge>
-                      </div>
-                    </b-card>
-                    <b-dropdown-item
-                      :event="'hover'"
-                      href="javascript:void(0)"
-                      v-for="(cont, index) in countries"
-                      :key="index"
-                      :value="cont.name"
-                      @click.native.capture.stop
-                    >
-                      <b-form-checkbox
-                        v-model="company.workInCountries"
-                        @click.native.stop=""
-                        :value="cont.name"
-                        >{{ cont.name }}</b-form-checkbox
+                  <b-card class="bcardmultidrop">
+                    <div>
+                      <b-badge
+                        class="multidropbadge"
+                        v-for="(k, index) in company.workInCountries"
+                        :key="index"
+                        pill
+                        variant="success"
                       >
-                    </b-dropdown-item>
-                  </b-dropdown>
-                </div>
+                        {{ k }}
+                      </b-badge>
+                    </div>
+                  </b-card>
+                  <b-dropdown-item
+                    :event="'hover'"
+                    href="javascript:void(0)"
+                    v-for="(cont, index) in countries"
+                    :key="index"
+                    :value="cont.name"
+                    @click.native.capture.stop
+                  >
+                    <b-form-checkbox
+                      v-model="company.workInCountries"
+                      @click.native.stop=""
+                      :value="cont.name"
+                      >{{ cont.name }}</b-form-checkbox
+                    >
+                  </b-dropdown-item>
+                </b-dropdown>
               </div>
-            </b-col>
+            </div>
             <hr />
             <!-- Social Media -->
             <div class="form-group row">
@@ -392,12 +355,7 @@
                   fill="white"
                 ></path>
               </svg>
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >Facebook</label
-              >
+              <label class="control-label col-sm-2" data-toggle="tooltip">Facebook</label>
               <div class="col-sm-4">
                 <b-input-group size="sm" style="width: 400px" prepend="https://facebook.com/">
                   <b-form-input v-model="company.facebook"></b-form-input>
@@ -447,12 +405,7 @@
                   </radialGradient>
                 </defs>
               </svg>
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >Instagram</label
-              >
+              <label class="control-label col-sm-2" data-toggle="tooltip">Instagram</label>
               <div class="col-sm-4">
                 <b-input-group size="sm" style="width: 400px" prepend="https://instagram.com/">
                   <b-form-input v-model="company.instagram"></b-form-input>
@@ -481,12 +434,7 @@
                   fill="white"
                 ></path>
               </svg>
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >LinkenIn</label
-              >
+              <label class="control-label col-sm-2" data-toggle="tooltip">LinkenIn</label>
               <div class="col-sm-4">
                 <b-input-group
                   size="sm"
@@ -514,12 +462,7 @@
                   fill="#005128"
                 ></path>
               </svg>
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >Trustpilot</label
-              >
+              <label class="control-label col-sm-2" data-toggle="tooltip">Trustpilot</label>
               <div class="col-sm-4">
                 <b-input-group
                   size="sm"
@@ -546,12 +489,7 @@
                   ></path>
                 </svg>
               </div>
-              <label
-                class="control-label col-sm-2"
-                data-toggle="tooltip"
-                data-original-title="This is a part of the unique url you use to log in to Bokun. Each customer has a unique url to log in to the system."
-                >Tripadvisor</label
-              >
+              <label class="control-label col-sm-2" data-toggle="tooltip">Tripadvisor</label>
               <div class="col-sm-4">
                 <b-input-group size="sm" style="width: 400px" prepend="https://tripadvisor.com/">
                   <b-form-input v-model="company.tripAdvisor"></b-form-input>
@@ -616,6 +554,7 @@ export default {
     if (!this.company.user > 0) {
       this.getCompany();
     }
+    this.amendSocial();
   },
 
   methods: {
@@ -662,6 +601,35 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+      this.amendSocial();
+    },
+    amendSocial() {
+      console.log(this.company.linkedIn);
+      if (this.company.facebook) {
+        this.company.facebook = this.company.facebook.substring(
+          this.company.facebook.lastIndexOf("/") + 1
+        );
+      }
+      if (this.company.linkedIn) {
+        this.company.linkedIn = this.company.linkedIn.substring(
+          this.company.linkedIn.lastIndexOf("/") + 1
+        );
+      }
+      if (this.company.instagram) {
+        this.company.instagram = this.company.instagram.substring(
+          this.company.instagram.lastIndexOf("/") + 1
+        );
+      }
+      if (this.company.tripAdvisor) {
+        this.company.tripAdvisor = this.company.tripAdvisor.substring(
+          this.company.tripAdvisor.lastIndexOf("/") + 1
+        );
+      }
+      if (this.company.trustpilot) {
+        this.company.trustpilot = this.company.trustpilot.substring(
+          this.company.trustpilot.lastIndexOf("/") + 1
+        );
+      }
     },
     showEdit() {
       this.locationToEdit = {
@@ -693,12 +661,16 @@ export default {
       formData.append("city", this.company.city);
       formData.append("description", this.company.description);
       formData.append("about_us", this.company.aboutUs);
-      formData.append("work_in_countries", this.company.workInCountries);
+      if (!this.company.workInCountries) {
+        formData.append("work_in_countries", null);
+      } else {
+        formData.append("work_in_countries", this.company.workInCountries);
+      }
       formData.append("facebook", `https://facebook.com/${this.company.facebook}`);
       formData.append("instagram", `https://instagram.com/${this.company.instagram}`);
-      formData.append("linkedIn", `https://linkedIn.com/${this.company.linkedIn}`);
+      formData.append("linked_in", `https://linkedIn.com/company/${this.company.linkedIn}`);
       formData.append("trustpilot", `https://trustpilot.com/${this.company.trustpilot}`);
-      formData.append("trip_advisor", `https://trip_advisor.com/${this.company.tripAdvisor}`);
+      formData.append("trip_advisor", `https://tripadvisor.com/${this.company.tripAdvisor}`);
       /* formData.append("instagram", this.company.instagram);
       formData.append("linkedIn", this.company.linkedIn);
       formData.append("trustpilot", this.company.trustpilot);
@@ -720,6 +692,9 @@ export default {
         .catch(() => {
           this.$toast.error("Something went wrong. Please check the errors.");
         });
+    },
+    cancel() {
+      this.changeloc = false;
     },
   },
 };

@@ -128,7 +128,7 @@ export default {
       console.log("my filtrations:", filtrations);
       return new Promise((resolve, reject) => {
         axios({
-          url: `http://127.0.0.1:8000/api/partners/my-contracts?page=${filtrations.page}`,
+          url: `http://127.0.0.1:8000/api/partners/my-contracts/?page=${filtrations.page}`,
           method: "post",
           data: filtrations.data,
         })
