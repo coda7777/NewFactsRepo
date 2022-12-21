@@ -301,7 +301,11 @@
                   size="md"
                   boundary="viewport"
                   variant="outline-dark"
-                  :text="company.workInCountries ? company.workInCountries : 'Select countries'"
+                  text="
+                    company.workInCountries.length
+                      ? company.workInCountries.length
+                      : work_in_countries + 'Select countries'
+                  "
                   class="m-md-6"
                   style="max-width: 650px !important; font-weight: 600"
                 >
@@ -549,7 +553,7 @@ export default {
   },
   async created() {
     this.company = await this.$store.getters["settings/getCompany"];
-    /* console.log("this.company ", this.company); */
+    console.log("this.company ", this.company);
     await this.getCountries();
     if (!this.company.user > 0) {
       this.getCompany();

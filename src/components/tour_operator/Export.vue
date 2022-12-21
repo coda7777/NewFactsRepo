@@ -117,9 +117,13 @@
                   <td>
                     <div class="justify-content">
                       <b-dropdown variant="warning" text="Facts Sheet" class="m-md-2">
-                        <b-dropdown-item @click="sendFactSheetPDFToGroupSelected(property.id)">Send Mail</b-dropdown-item>
+                        <b-dropdown-item @click="sendFactSheetPDFToGroupSelected(property.id)"
+                          >Send Mail</b-dropdown-item
+                        >
                         <b-dropdown-item>Contracted</b-dropdown-item>
-                        <b-dropdown-item @click="factSheetPDFDownload(property.id)">Download</b-dropdown-item>
+                        <b-dropdown-item @click="factSheetPDFDownload(property.id)"
+                          >Download</b-dropdown-item
+                        >
                         <b-dropdown-item></b-dropdown-item>
                       </b-dropdown>
 
@@ -134,7 +138,9 @@
                       <b-dropdown variant="warning" text="Stop Sale" class="m-md-2">
                         <b-dropdown-item>Default</b-dropdown-item>
                         <b-dropdown-item>Contracted</b-dropdown-item>
-                        <b-dropdown-item @click="calendarPDFDownload(property.id)">Calendar</b-dropdown-item>
+                        <b-dropdown-item @click="calendarPDFDownload(property.id)"
+                          >Calendar</b-dropdown-item
+                        >
                         <b-dropdown-item></b-dropdown-item>
                       </b-dropdown>
                       <!--
@@ -247,7 +253,7 @@
         <hr style="margin-top: 30px; margin-bottom: 30px" />
         <div class="form-group anfilter nav justify-content-center">
           <h4>Group Mailing Option</h4>
-          <b-form-select  v-model="GroupMailToSend" :select-size="10">
+          <b-form-select v-model="GroupMailToSend" :select-size="10">
             <option :value="null">Select Group</option>
             <option v-for="(list, index) in mailingLists" :key="index" :value="list.id">
               {{ list.name }}
@@ -262,7 +268,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -301,11 +307,11 @@ export default {
       ],
     };
   },
-  watch:{
-    GroupMailToSend(){
-      console.log(this.GroupMailToSend)
-      this.SET_GROUP_MAIL_TO_SEND(this.GroupMailToSend)
-    }
+  watch: {
+    GroupMailToSend() {
+      console.log(this.GroupMailToSend);
+      this.SET_GROUP_MAIL_TO_SEND(this.GroupMailToSend);
+    },
   },
   computed: {
     countries() {
@@ -340,10 +346,10 @@ export default {
   methods: {
     ...mapMutations({
       // SET_CURRENT_HOTEL_ID: "exportCenter/SET_CURRENT_HOTEL_ID",
-      SET_GROUP_MAIL_TO_SEND:'exportCenter/SET_GROUP_MAIL_TO_SEND'
+      SET_GROUP_MAIL_TO_SEND: "exportCenter/SET_GROUP_MAIL_TO_SEND",
     }),
     ...mapActions({
-      getMailingLists:'settings/getMailingLists',
+      getMailingLists: "settings/getMailingLists",
       calendarPDFDownload: "calendar/calendarPDFDownload",
       factSheetPDFDownload: "exportCenter/factSheetPDFDownload",
       sendFactSheetPDFToGroupSelected: "exportCenter/sendFactSheetPDFToGroupSelected",

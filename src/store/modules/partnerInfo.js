@@ -129,7 +129,7 @@ export default {
         axios({
           url: `http://127.0.0.1:8000/api/partners/my-contracts/?page=${filtrations.page}`,
           method: "post",
-          data: filtrations.data,
+          data: filtrations,
         })
           .then((response) => {
             context.commit("updateContracts", response.data);
