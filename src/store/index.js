@@ -29,7 +29,7 @@ import partners from "./modules/partnerInfo";
 import calendar from "./modules/calstore";
 import devTools from "./modules/devToolInfo";
 import widgetAppearance from "./modules/widgetAppearance";
-import exportCenter from './modules/exportCenter'
+import exportCenter from "./modules/exportCenter";
 Vue.use(Vuex);
 
 export default new Vuex.Store({

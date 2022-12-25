@@ -810,6 +810,9 @@ export default {
       };
       return dict[keyValue];
     },
+    accountType() {
+      return this.$store.getters["user/getUserType"];
+    },
   },
   methods: {
     convertBool(value) {

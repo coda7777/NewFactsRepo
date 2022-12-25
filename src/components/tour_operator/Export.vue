@@ -104,28 +104,27 @@
                   <th scope="col">state</th>
                   <th scope="col">City</th>
                   <th scope="col">Hotel</th>
+                  <th scope="col">Last update</th>
                   <th scope="col">Export</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(property, index) in properties" :key="index">
+                <tr v-for="(property, index) in properties.results" :key="index">
                   <th scope="row">{{ index + 1 }}</th>
                   <td>{{ property.country }}</td>
                   <td>{{ property.state }}</td>
                   <td>{{ property.city }}</td>
-                  <td>{{ property.hotelName }}</td>
+                  <td>{{ property.hotel_name }}</td>
+                  <td>{{ parseDate(property.date_update) }}</td>
                   <td>
                     <div class="justify-content">
-                      <b-dropdown variant="warning" text="Facts Sheet" class="m-md-2">
-                        <b-dropdown-item @click="sendFactSheetPDFToGroupSelected(property.id)"
-                          >Send Mail</b-dropdown-item
-                        >
-                        <b-dropdown-item>Contracted</b-dropdown-item>
-                        <b-dropdown-item @click="factSheetPDFDownload(property.id)"
-                          >Download</b-dropdown-item
-                        >
-                        <b-dropdown-item></b-dropdown-item>
-                      </b-dropdown>
+                      <b-button
+                        variant="warning"
+                        text="Facts Sheet"
+                        class="m-md-2"
+                        @click="factSheetPDFDownload(property.id)"
+                        >Download Facts sheet
+                      </b-button>
 
                       <!-- <b-button variant="warning" :to="`/property-photos/${property.id}/`">
                         Facts Sheet
@@ -135,14 +134,13 @@
                         Photos
                       </b-button>
                       &nbsp;&nbsp;
-                      <b-dropdown variant="warning" text="Stop Sale" class="m-md-2">
-                        <b-dropdown-item>Default</b-dropdown-item>
-                        <b-dropdown-item>Contracted</b-dropdown-item>
-                        <b-dropdown-item @click="calendarPDFDownload(property.id)"
-                          >Calendar</b-dropdown-item
-                        >
-                        <b-dropdown-item></b-dropdown-item>
-                      </b-dropdown>
+                      <b-button
+                        variant="warning"
+                        text="Stop Sale"
+                        class="m-md-2"
+                        @click="calendarPDFDownload(property.id)"
+                        >Download Stop Sale
+                      </b-button>
                       <!--
                     <a
                       class="btn btn-warning btn-sm d-none d-sm-inline-block"
@@ -253,22 +251,15 @@
         <hr style="margin-top: 30px; margin-bottom: 30px" />
         <div class="form-group anfilter nav justify-content-center">
           <h4>Group Mailing Option</h4>
-          <b-form-select v-model="GroupMailToSend" :select-size="10">
-            <option :value="null">Select Group</option>
-            <option v-for="(list, index) in mailingLists" :key="index" :value="list.id">
-              {{ list.name }}
-            </option>
-          </b-form-select>
         </div>
-        <div style="margin-top: 20px">
-          <b-button to="/mailing-lists" variant="success">Manage Mailing Groups</b-button>
-        </div>
+        <div>Demo Div</div>
+        <div style="margin-top: 20px">removed div - demo</div>
       </b-col>
     </b-row>
   </div>
 </template>
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -279,52 +270,17 @@ export default {
       GroupMailToSend: null,
       galleryFilter: "all",
       filterByCountry: [],
-      filterByAccountType: "",
-      filterByCompanyStatus: "",
-      company: {
-        company: "",
-        address: "",
-        contactNumber: "",
-        logo: "",
-      },
-      contractStatus: [
-        { value: "", text: "Select contract status" },
-        { value: "D", text: "Draft" },
-        { value: "P", text: "Pending" },
-        { value: "C", text: "Changed" },
-        { value: "R", text: "Rejected" },
-        { value: "X", text: "Cancelled" },
-        { value: "A", text: "Active" },
-        { value: "Incoming proposal", text: "Incoming proposal" },
-        { value: "Outgoing Proposal", text: "Outgoing Proposal" },
-      ],
-      selected: null,
-      options: [
-        { value: "", text: "Filter by role" },
-        { value: "accommodation", text: "Accommodation" },
-        { value: "tour operator", text: "Tour Operator" },
-        { value: "3rd party", text: "3rd party" },
-      ],
     };
-  },
-  watch: {
-    GroupMailToSend() {
-      console.log(this.GroupMailToSend);
-      this.SET_GROUP_MAIL_TO_SEND(this.GroupMailToSend);
-    },
   },
   computed: {
     countries() {
       return this.$store.getters["countries/getCountries"];
     },
-    mailingLists() {
-      return this.$store.getters["settings/getMailingLists"];
-    },
-    properties() {
-      return this.$store.getters["property/getProperties"];
-    },
     isAuthenticated() {
       return this.$store.getters["user/isAuthenticated"];
+    },
+    properties() {
+      return this.$store.getters["partners/getPartnersProperties"];
     },
     companyLogos() {
       if (this.galleryFilter === "all") {
@@ -332,75 +288,41 @@ export default {
       }
       return this.images.filter((image) => image.filter === this.galleryFilter);
     },
-    partners() {
+    /*     partners() {
       return this.$store.getters["partners/getPartners"];
-    },
+    }, */
   },
   async created() {
-    await this.getMailingLists();
     await this.getCountries();
     await this.getProperties();
-    this.getCompany();
-    this.getPartners();
   },
   methods: {
-    ...mapMutations({
-      // SET_CURRENT_HOTEL_ID: "exportCenter/SET_CURRENT_HOTEL_ID",
-      SET_GROUP_MAIL_TO_SEND: "exportCenter/SET_GROUP_MAIL_TO_SEND",
-    }),
     ...mapActions({
-      getMailingLists: "settings/getMailingLists",
       calendarPDFDownload: "calendar/calendarPDFDownload",
       factSheetPDFDownload: "exportCenter/factSheetPDFDownload",
-      sendFactSheetPDFToGroupSelected: "exportCenter/sendFactSheetPDFToGroupSelected",
     }),
-
-    getPartners() {
-      const filtration = {
+    parseDate(inputDate) {
+      const d = new Date(inputDate);
+      const resultDate = `${d.getUTCDate()}-${d.getUTCMonth() + 1}-${d.getUTCFullYear()}`;
+      return resultDate;
+    },
+    async getProperties() {
+      const selecteFilter = {
         page: 1,
         data: {
           countries: this.filterByCountry,
-          role: this.filterByAccountType,
-          status: this.filterByCompanyStatus,
         },
       };
-      this.$store.dispatch("partners/retrievePartners", filtration);
-    },
-    async getCountries() {
-      await this.$store.dispatch("countries/retrieveCountries");
-    },
-    getCompany() {
-      this.$store
-        .dispatch("settings/retrieveCompany")
-        .then(() => {
-          this.company = this.$store.getters["settings/getCompany"];
-        })
-        .catch(() => {});
-    },
-    async getProperties() {
+      console.log("dispatch retrieve properties method ");
       await this.$store
-        .dispatch("property/getInfo")
-        // eslint-disable-next-line no-unused-vars
+        .dispatch("partners/retrievePartnersProperties", selecteFilter)
         .then((response) => {
-          /* console.log(response); */
+          console.log(response);
         })
         // eslint-disable-next-line no-unused-vars
         .catch((error) => {
           /* console.log(error); */
         });
-    },
-    filterContract(type) {
-      const filterType = type;
-      return filterType;
-    },
-    sendContract(companyID) {
-      return companyID;
-    },
-    MessageCompany(companyID) {
-      return companyID;
-    },
-    viewIncomingContract() {
-      return this.incomingContract;
     },
   },
 };

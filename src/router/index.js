@@ -106,6 +106,12 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   {
+    path: "/toexportcentre",
+    name: "ExportCentre",
+    component: () => import("../components/tour_operator/Export.vue"),
+    beforeEnter: ifAuthenticated,
+  },
+  {
     path: "/user-profile",
     name: "UserProfile",
     component: () => import("../components/connectivity/UserProfile.vue"),

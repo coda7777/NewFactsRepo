@@ -16,6 +16,7 @@ export default {
       results: [],
     },
     partnerToContract: {},
+    properties: {},
   },
   mutations: {
     updatePartnerToContract(state, newData) {
@@ -23,6 +24,9 @@ export default {
     },
     updateContracts(state, newData) {
       state.contracts = newData;
+    },
+    updatePartnerProperties(state, newData) {
+      state.properties = newData;
     },
     updatePartners(state, newData) {
       const newPartners = {
@@ -85,7 +89,6 @@ export default {
     },
 
     retrievePartners(context, filtrations) {
-      console.log("my filtrations:", filtrations);
       return new Promise((resolve, reject) => {
         axios({
           url: `http://127.0.0.1:8000/api/partners/?page=${filtrations.page}`,
@@ -106,8 +109,28 @@ export default {
           });
       });
     },
+    retrievePartnersProperties(context, filtrations) {
+      console.log("my filtrations:", filtrations);
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `http://127.0.0.1:8000/api/partners/partnersproperties/?page=${filtrations.page}`,
+          method: "post",
+          data: filtrations,
+        })
+          .then((response) => {
+            console.log("retreive properties response", response.data);
+            context.commit("updatePartnerProperties", response.data);
+            resolve(response.data);
+          })
+          .catch((error) => {
+            console.log(error.response.data);
+            reject(error.response.data);
+          });
+        console.log("state of properties", this.State.properties);
+      });
+    },
     postContract(context, contractInfo) {
-      console.log("my filtrations:", contractInfo);
+      /* console.log("my filtrations:", contractInfo); */
       return new Promise((resolve, reject) => {
         axios({
           url: "http://127.0.0.1:8000/api/partners/contract/create/",
@@ -125,7 +148,7 @@ export default {
       });
     },
     retrieveContracts(context, filtrations) {
-      console.log("my filtrations:", filtrations);
+      /* console.log("my filtrations:", filtrations); */
       return new Promise((resolve, reject) => {
         axios({
           url: `http://127.0.0.1:8000/api/partners/my-contracts/?page=${filtrations.page}`,
@@ -133,6 +156,7 @@ export default {
           data: filtrations,
         })
           .then((response) => {
+            /* console.log("retreive contracts response", response); */
             context.commit("updateContracts", response.data);
             resolve(response.data);
           })
@@ -146,6 +170,9 @@ export default {
   getters: {
     getPartners(state) {
       return state.partners;
+    },
+    getPartnersProperties(state) {
+      return state.properties;
     },
     getPartnerToContract(state) {
       return state.partnerToContract;

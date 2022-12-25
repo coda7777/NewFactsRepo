@@ -36,7 +36,14 @@
           <b-icon icon="calendar3" scale="1.2"></b-icon>
           <p>Availability Chart</p>
         </sidebar-link>
-        <sidebar-link to="/exportcentre" v-if="isManager || permissions.photos">
+        <sidebar-link
+          to="/exportcentre"
+          v-if="accountType === 'accommodation' && (isManager || permissions.properties)"
+        >
+          <b-icon icon="arrow90deg-down" scale="1.2"></b-icon>
+          <p>Export Center</p>
+        </sidebar-link>
+        <sidebar-link to="/toexportcentre" v-if="accountType === 'to' && isManager">
           <b-icon icon="arrow90deg-down" scale="1.2"></b-icon>
           <p>Export Center</p>
         </sidebar-link>
