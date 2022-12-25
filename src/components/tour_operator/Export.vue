@@ -49,34 +49,7 @@
                     </b-dropdown-item>
                   </b-dropdown>
                 </div>
-                <div class="anfilter">
-                  <select
-                    boundary="viewport"
-                    variant="outline-dark"
-                    text="Filter by role"
-                    class="form-control-sm"
-                    v-model="filterByAccountType"
-                    :options="options"
-                  >
-                    <option v-for="(c, index) in options" :key="index" :value="c.value">
-                      {{ c.text }}
-                    </option>
-                  </select>
-                </div>
-                <div class="anfilter">
-                  <select
-                    boundary="viewport"
-                    variant="outline-dark"
-                    text="Filter by role"
-                    class="form-control-sm"
-                    v-model="filterByCompanyStatus"
-                  >
-                    <option v-for="(c, index) in contractStatus" :key="index" :value="c.value">
-                      {{ c.text }}
-                    </option>
-                  </select>
-                </div>
-                <button @click="getPartners">Search</button>
+                <button @click="getProperties()">Search</button>
               </div>
             </div>
             <div class="col-md-6">
@@ -293,7 +266,7 @@ export default {
     }, */
   },
   async created() {
-    await this.getCountries();
+    /* await this.getCountries(); */
     await this.getProperties();
   },
   methods: {
