@@ -29,7 +29,7 @@ export default {
         .then((res) => {
           state.isLoading = false;
           alert(res.data.message);
-          commit("SET_GROUP_MAIL_TO_SEND", null);
+          res.commit("SET_GROUP_MAIL_TO_SEND", null);
         });
     },
 
@@ -45,7 +45,7 @@ export default {
         const url = window.URL.createObjectURL(new Blob([res.data], { type: "application/pdf" }));
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", `fact-sheet.pdf`);
+        link.setAttribute("download", `fact-sheet-${hotel_id}.pdf`);
         document.body.appendChild(link);
         link.click();
       });

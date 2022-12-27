@@ -275,11 +275,7 @@
                 />
               </b-form-group>
               <b-button type="submit" variant="outline-success" class="modalbutton">Save</b-button>
-              <b-button
-                type="button"
-                variant="outline-danger"
-                class="modalbutton"
-                @click="cancelNewContact()"
+              <b-button type="button" variant="outline-danger" class="modalbutton" @click="cancel()"
                 >Cancel</b-button
               >
             </form>
@@ -467,7 +463,7 @@ export default {
     },
     selectGroup(groupId) {
       this.currentGroup = groupId;
-      this.currentDisplayedList();
+      /* this.currentDisplayedList(); */
       this.getContacts();
     },
     createNewContactCard() {
