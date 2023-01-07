@@ -755,16 +755,33 @@
           </b-row>
         </b-card>
       </b-tab>
+
+
+      <b-tab title="New Payment ">
+        <div class="mt-5">
+        <div class="row row-cols-1 row-cols-md-3 g-3 ">
+
+            <PakageItem  v-for="p in pakages" :key="p.id"
+            :pakage="p"
+            />
+          </div>
+        </div>
+
+      </b-tab>
     </b-tabs>
     <b-row> </b-row>
   </div>
 </template>
 <script>
 import fixedPlugin from "../layout/FixedPlugin.vue";
+import jwtInterceptor from '../../store/modules/jwtInterceptor'
+// import PPakage from "./PPakage.vue";
+import PakageItem from './PakageItem.vue';
 
 export default {
   data() {
     return {
+      pakages:[],
       themeChanger: false,
       showModal: false,
       changePasswordMod: false,
@@ -788,9 +805,10 @@ export default {
     this.getUser();
     this.getGenuine();
     this.getPremium();
+    this.loadPakages()
   },
   // eslint-disable-next-line vue/no-unused-components
-  components: { fixedPlugin },
+  components: { fixedPlugin,PakageItem },
   computed: {
     isAuthenticated() {
       return this.$store.getters["user/isAuthenticated"];
@@ -815,6 +833,16 @@ export default {
     },
   },
   methods: {
+    async loadPakages(){
+                await jwtInterceptor.get('api/payments/packages/')
+                    .then((res) => {
+                        this.pakages = res.data.results
+                    })
+                    .catch((err) => {
+                        console.log('Packages', err)
+                    })
+                },
+
     convertBool(value) {
       return value ? "Yes" : "No";
     },
