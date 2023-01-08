@@ -22,6 +22,13 @@
 @import url(./css/SideBar.css);
 @import url(./css/cards.css);
 
+
+/* Variables */
+:root {
+  --primary: #fff;
+  --secondary: rgb(228, 228, 228);
+}
+
 /* Main area  */
 .wrapper {
   /*   background-color: #d6d6d694; */
@@ -54,10 +61,7 @@
   background: white;
 }
 
-.tabs .tab-content .tab-pane {
-  background-color: #fdfdfd !important;
-  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
-}
+
 
 @media (min-width: 1280px) {
   .container {
@@ -172,6 +176,12 @@
   bottom: 0;
   width: 100%;
   text-align: center;
+}
+
+.innerpage-sidebar {
+  background-color: #f9f9f9;
+  padding: 50px 15px;
+  border-right: solid black 1px;
 }
 
 .reqastr {
@@ -452,6 +462,11 @@
 .renderedmessdiv {
   border-bottom: 1px solid #dee2e6 !important;
   display: block;
+  padding: 6px;
+  margin: 6px 0px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .renderednoticemessbody {
@@ -478,8 +493,40 @@
   /* color: #707070; */
   color: #4d4d4d;
 }
+.noticefooterwrap {
+  display: inline-block;
+  width: 100%;
+  padding: 5px;
+}
+
+.rendernoticedate {
+  float: left;
+  font-size: x-small;
+  font-weight: initial;
+  width: 30%;
+}
+
+/* .rendernoticedate {
+  padding: 0px 20px 5px 0px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  font-size: x-small;
+  color: gray;
+  cursor: pointer;
+  font-weight: initial;
+  } */
 
 .notdismissnotice {
+  float: right;
+  text-align: center;
+  font-weight: initial;
+  width: 40%;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+/* .notdismissnotice {
   padding: 0px 20px 5px 0px;
   display: flex;
   align-items: flex-end;
@@ -488,7 +535,7 @@
   color: gray;
   cursor: pointer;
   font-weight: initial;
-}
+} */
 
 .nav-link {
   display: inline-flex !important;
@@ -754,6 +801,7 @@ ul.dropdown-menu.show {
 .tabs .tab-content .tab-pane {
   background-color: #ededed;
   border: 1px solid rgb(194, 194, 194);
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
   margin-left: 1rem;
 }
 .tabs .nav-pills .nav-link.active,
@@ -978,11 +1026,10 @@ progress {
   background-image: linear-gradient(to right, #00835c, #21db59);
 }
 
-
 /* ---------- New Calendar ----- */
 
 .caldrpmen {
   width: fit-content !important;
   border: 2px solid #000000 !important;
-  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 70%), 0 5px 41px 0 rgb(0 0 0 / 25%)
+  box-shadow: 0 5px 20px 0 rgb(0 0 0 / 70%), 0 5px 41px 0 rgb(0 0 0 / 25%);
 }

@@ -369,7 +369,7 @@
                 bookings and get additional distributions through the Affiliate hub.
               </p>
               <div v-if="preferences.plan === 'F'" class="sc-ehCJOs jNbSbr">
-                <b-button variant="success" to="/subscribe">Upgrade to PREMIUM</b-button>
+                <b-button variant="success" to="/premium-account">Upgrade to PREMIUM</b-button>
               </div>
             </div>
           </b-row>
@@ -505,7 +505,7 @@
                                   ></rect>
                                 </svg>
                                 <div style="margin: 15px 5px">
-                                  <a loading="0" href="/subscribe" class="sc-furwcr ejyCsp"
+                                  <a loading="0" href="/premium-account" class="sc-furwcr ejyCsp"
                                     >Upgrade to PREMIUM</a
                                   >
                                 </div>
@@ -712,11 +712,11 @@
                                 <p class="sc-jcFjpl ZGdfu">Google Things to do</p>
                               </div>
                             </div>
-                            <b-button loading="0" to="/subscribe" class="sc-furwcr lkUTuA"
+                            <b-button loading="0" to="/premium-account" class="sc-furwcr lkUTuA"
                               >Upgrade to PREMIUM</b-button
                             >
                             <div style="margin-top: 16px">
-                              <a href="https://www.bokun.io/pricing" class="sc-dPiLbb fuQCIy"
+                              <a href="https://www.hotelfacts.net/pricing" class="sc-dPiLbb fuQCIy"
                                 >Learn more</a
                               >
                             </div>
@@ -761,10 +761,13 @@
 </template>
 <script>
 import fixedPlugin from "../layout/FixedPlugin.vue";
+import jwtInterceptor from "../../store/modules/jwtInterceptor";
+import PakageItem from "../Premium/PakageItem.vue";
 
 export default {
   data() {
     return {
+      pakages: [],
       themeChanger: false,
       showModal: false,
       changePasswordMod: false,
@@ -788,9 +791,10 @@ export default {
     this.getUser();
     this.getGenuine();
     this.getPremium();
+    this.loadPakages();
   },
   // eslint-disable-next-line vue/no-unused-components
-  components: { fixedPlugin },
+  components: { fixedPlugin, PakageItem },
   computed: {
     isAuthenticated() {
       return this.$store.getters["user/isAuthenticated"];
@@ -815,6 +819,16 @@ export default {
     },
   },
   methods: {
+    async loadPakages() {
+      await jwtInterceptor
+        .get("api/payments/packages/")
+        .then((res) => {
+          this.pakages = res.data.results;
+        })
+        .catch((err) => {
+          console.log("Packages", err);
+        });
+    },
     convertBool(value) {
       return value ? "Yes" : "No";
     },

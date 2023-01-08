@@ -28,10 +28,10 @@
         </slot>
       </b-nav>
     </div>
-    <!-- <div class="footer" style="cursor: pointer" @click="newStuff()">
+    <div class="footer" style="cursor: pointer" @click="newStuff()">
       <p class="h4 mb-2"><b-icon icon="flag-fill"></b-icon></p>
       What's new?
-    </div> -->
+    </div>
     <transition name="fade" appear>
       <div v-if="newFeatures">
         <div class="modal-overlay" v-if="newFeatures" @click="newFeatures = false"></div>
@@ -41,7 +41,7 @@
               class="h2 mb-2"
               font-scale="5"
               style="z-index: 99; float: right; position: relative"
-              ><b-icon icon="x" @click="closeStuff()"></b-icon
+              ><b-icon icon="x" style="cursor: pointer" @click="closeStuff()"></b-icon
             ></span>
             <div class="modalheaderback">
               <svg

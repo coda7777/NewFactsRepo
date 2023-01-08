@@ -17,14 +17,18 @@
           v-if="notice.isRead === false"
           class="renderednoticemessbody"
           @mouseover="updateNotification(notice)"
+          @click="goTo(notice.link)"
           >{{ notice.message }} {{ notice.extraId }}</span
         >
-        <span v-else class="renderednoticemessbody">
+        <span v-else class="renderednoticemessbody" @click="goTo(notice.link)">
           {{ notice.message }} {{ notice.extraId }}</span
         >
-        <span class="notdismissnotice"
-          ><a @click="dismissNotification(notice)">Dismiss Notification</a></span
-        >
+        <div class="noticefooterwrap">
+          <span class="rendernoticedate">{{ parseDate(notice.createdAt) }}</span>
+          <span class="notdismissnotice"
+            ><a @click="dismissNotification(notice)">Dismiss Notification</a></span
+          >
+        </div>
       </div>
     </div>
     <div v-if="notifications.length === 0" class="dhiCld">
@@ -111,6 +115,17 @@ export default {
       this.getNotifications();
       this.isLoading = false;
       console.log("hello notice", requestBody);
+    },
+    goTo(path) {
+      console.log("go to", path);
+      this.$router.push(path);
+    },
+    parseDate(inputDate) {
+      const d = new Date(inputDate);
+      const resultDate = `${d.getUTCDate()}.${
+        d.getUTCMonth() + 1
+      }.${d.getUTCFullYear()} ${d.getUTCHours()}:${d.getUTCMinutes()}`;
+      return resultDate;
     },
     async dismissNotification(notificationToRemove) {
       await this.$store

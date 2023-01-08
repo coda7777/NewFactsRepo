@@ -19,6 +19,7 @@ export default {
           message: item.message,
           isRead: item.is_read,
           extraId: item.extra_id,
+          link: item.link,
           createdAt: item.created_at,
           createdBy: item.created_at,
         });

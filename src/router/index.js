@@ -150,13 +150,6 @@ const routes = [
   /* End side Dashboard links */
   /* Start top bar menues links */
   {
-    path: "/premium-account",
-    name: "AccountUpgrade",
-    component: () => import("../components/Premium/PremiumUpgrade.vue"),
-    beforeEnter: ifAuthenticated,
-  },
-
-  {
     path: "/authorized-users",
     name: "Authorizations",
     component: () => import("../components/connectivity/AuthorizedUsers.vue"),
@@ -312,15 +305,21 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   {
-    path: "/edit-paymentdetails",
-    name: "PaymentSettingChange",
-    component: () => import("../components/settings/PaymentDetails.vue"),
+    path: "/premium-account",
+    name: "AccountUpgrade",
+    component: () => import("../components/Premium/PremiumUpgrade.vue"),
     beforeEnter: ifAuthenticated,
   },
   {
-    path: "/subscribe",
-    name: "subscribe",
-    component: () => import("../components/settings/Subscribe.vue"),
+    path: "/edit-paymentdetails",
+    name: "PaymentSettingChange",
+    component: () => import("../components/Premium/PaymentDetails.vue"),
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: "/packageitem",
+    name: "package",
+    component: () => import("../components/Premium/PakageItem.vue"),
     beforeEnter: ifAuthenticated,
   },
   {

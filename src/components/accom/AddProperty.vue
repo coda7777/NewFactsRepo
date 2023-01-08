@@ -19,6 +19,8 @@
         >
       </b-col>
     </b-row>
+    <br />
+
     <div class="GFS-Center-Table">
       <table class="table table-hover">
         <thead class="GFS-TNave">
@@ -30,20 +32,34 @@
             <th scope="col">Hotel</th>
             <th scope="col">Status</th>
             <th scope="col"></th>
-            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(property, index) in properties" :key="index">
             <th scope="row">{{ index + 1 }}</th>
+
             <td>{{ property.country }}</td>
             <td>{{ property.state }}</td>
             <td>{{ property.city }}</td>
             <td>{{ property.hotelName }}</td>
-            <b-button size="sm" variant="outline-info" @click="showEdit(property)">Edit</b-button>
-            <b-button size="sm" variant="outline-danger" @click="showRemove(property)"
-              >Remove</b-button
-            >
+            <td v-if="property.publish" class="text-success">Live</td>
+            <td v-else class="text-danger">Unpublished</td>
+            <td>
+              <b-button
+                size="sm"
+                variant="outline-info"
+                @click="showEdit(property)"
+                style="margin: 0px 4px"
+                >Edit</b-button
+              >
+              <b-button
+                size="sm"
+                variant="outline-danger"
+                @click="showRemove(property)"
+                style="margin: 0px 4px"
+                >Remove</b-button
+              >
+            </td>
           </tr>
         </tbody>
       </table>

@@ -1,8 +1,28 @@
 <template>
-  <div class="container">
-    <b-col cols="10">
-      <h4>Manage property's Photos</h4>
-    </b-col>
+  <b-container>
+    <b-row>
+      <b-col cols="10">
+        <h4>Accommodation's photos</h4>
+        <span
+          >View and manage Photos for your accommodation, All photos are available for usage
+          directly into facts sheet or to send. More Info
+          <b-icon
+            icon="question-circle-fill"
+            scale="1.2"
+            variant="primary"
+            aria-label="Help"
+          ></b-icon>
+        </span>
+        <br />
+        <b-card
+          ><span
+            >Runing out of space ? Do you need maximum photos resolution and unlimited photos space
+            ! Cosider </span
+          ><a loading="0" href="/subscribe" class="sc-furwcr ejyCsp">Upgrading to PREMIUM</a>
+        </b-card>
+      </b-col>
+    </b-row>
+    <br />
 
     <div class="GFS-Center-Table">
       <table class="table table-hover">
@@ -26,7 +46,7 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </b-container>
 </template>
 <script>
 export default {

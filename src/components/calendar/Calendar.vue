@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-card>
     <b-row>
       <b-col cols="12" class="row nav justify-content-end">
         <div>
@@ -152,7 +152,7 @@
         </button>
       </div>
     </div>
-  </b-container>
+  </b-card>
 </template>
 
 <script>

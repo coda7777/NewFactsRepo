@@ -164,44 +164,9 @@
         </b-row>
       </b-col>
       <b-col cols="4">
-        <b-row>
-          <b-col>
-            <b-card-group deck>
-              <b-card
-                border-variant="dark"
-                header="Dark"
-                header-text-variant="white"
-                header-tag="header"
-                header-bg-variant="dark"
-              >
-                <template #header>
-                  <h4 class="mb-0">UPDATES</h4>
-                </template>
-                <b-card-title class="h5">Your Facts Platform Updates</b-card-title>
-                <h6 style="font-weight: 600">How do I start using Ananas Facts for my hotel</h6>
-                <p>
-                  What better way to win over your customers online than giving them a detailed
-                  overview of your hotel? Easily choose from various options to form your final
-                  sheet. <a href="">Read More <b-icon icon="arrow-right-square"></b-icon></a>
-                </p>
-                <a href="#">Visit our documentation</a>
-                <h6 style="font-weight: 600">How do I start using Ananas Facts for my hotel</h6>
-                <p>
-                  What better way to win over your customers online than giving them a detailed
-                  overview of your hotel? Easily choose from various options to form your final
-                  sheet. <a href="">Read More <b-icon icon="arrow-right-square"></b-icon></a>
-                </p>
-                <a href="#">Visit our documentation</a>
-                <template #footer>
-                  <span><b-icon icon="clock" scale="1"></b-icon></span>
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </template>
-              </b-card>
-            </b-card-group>
-          </b-col>
-        </b-row>
-        <br />
-        <br />
+        <div>
+          <AppData />
+        </div>
         <b-row>
           <b-col>
             <chart-card data-background-color="ananas" :chart-data="pieChart.data" chart-type="Pie">
@@ -313,12 +278,14 @@
 import ChartCard from "../cards/ChartCard.vue";
 import StatsCard from "../cards/StatsCard.vue";
 import LTable from "./Card.vue";
+import AppData from "../layout/appData.vue";
 
 export default {
   components: {
     LTable,
     ChartCard,
     StatsCard,
+    AppData,
   },
   data() {
     return {

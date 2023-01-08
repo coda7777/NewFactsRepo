@@ -1,14 +1,29 @@
+:root {
+  --primary-dark: #11141b;
+  --secondary-dark: #172a46;
+  --text-color-dark: #fff;
+  --secondarytext-color-dark: rgb(226, 226, 226);
+  --headers-dark: rgb(247, 184, 11);
+  --border-color-dark: rgb(83, 83, 83);
+  --inputs-color-dark: rgb(228, 228, 228);
+  --hover-dark: #1b253b;
+}
+
 body.dark-mode {
   color: rgb(204, 204, 204);
   background-color: #141a2b;
 }
 
-.dark-mode .darkwrapper {
+/* .dark-mode .darkwrapper {
   background-color: #111725 !important;
-}
+} */
 
 body.dark-mode .container {
-  background-color: #111725 !important;
+  background-color: var(--primary-dark);
+}
+
+.dark-mode .wrapper {
+  background-color: var(--primary-dark);
 }
 
 body.dark-mode .flex h1 {
@@ -16,7 +31,7 @@ body.dark-mode .flex h1 {
 }
 
 body.dark-mode .card {
-  background-color: #2c3859 !important;
+  background-color: var(--secondary-dark);
 }
 
 .dark-mode .form-control:disabled,
@@ -94,9 +109,8 @@ body.dark-mode .mode-toggle .toggle #dark-mode:before {
 }
 /* Property table */
 .dark-mode .GFS-Center-Table {
-  box-shadow: 0 2px 22px 0 rgba(184, 9, 9, 0.1),
-    0 4px 20px 0 rgba(207, 207, 207, 0.15);
-  background: rgb(53, 53, 53);
+  box-shadow: -1px 2px 7px 0 rgb(54 54 54 / 0%), 0 4px 8px 0 rgb(207 207 207 / 15%);
+  background: var(--secondary-dark);
 }
 
 .dark-mode .GFS-Center-Table .GFS-TNave {
@@ -120,7 +134,7 @@ body.dark-mode .mode-toggle .toggle #dark-mode:before {
 }
 
 .dark-mode .bg-light {
-/*   background-color: linear-gradient(
+  /*   background-color: linear-gradient(
     180deg,
     #232a3d 0%,
     #283046 100%,
@@ -150,4 +164,33 @@ body.dark-mode .mode-toggle .toggle #dark-mode:before {
 
 .dark-mode hr {
   background: #7f774c;
+}
+
+.dark-mode .innerpage-sidebar {
+  background: var(--secondary-dark);
+}
+
+.dark-mode .dashcard {
+  background: #172a46;
+  color: var(--text-color);
+  border-color: var(--border-color-dark);
+}
+.dark-mode .text-dark {
+  color: var(--secondarytext-color) !important;
+}
+
+.dark-mode .btn {
+  color: var(--text-color-dark);
+}
+
+.dark-mode .btn:hover {
+  color: #8cc5ff;
+}
+/* Calendar row hover  */
+.dark-mode .source:hover {
+  background-color: var(--hover-dark);
+}
+
+.dark-mode .tabs .tab-pane {
+  background-color: var(--primary-dark) !important;
 }

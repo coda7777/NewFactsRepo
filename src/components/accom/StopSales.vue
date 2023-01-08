@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <!-- <b-row>
+    <!--     <b-row>
       <b-col cols="12">
         <div class="container-fluid">
           <h3 class="text-dark mb-1">
@@ -13,22 +13,40 @@
           </div>
         </div>
       </b-col>
+    </b-row> -->
+    <b-row>
+      <b-col cols="10">
+        <h4>Availability Charts</h4>
+        <span
+          >View and manage availability for your property's rooms. More Info
+          <b-icon
+            icon="question-circle-fill"
+            scale="1.2"
+            variant="primary"
+            aria-label="Help"
+          ></b-icon>
+        </span>
+      </b-col>
     </b-row>
-    <br /> -->
-    <b-card>
+    <br />
+    <div>
       <b-row>
-        <b-col
-          cols="2"
-          id="sideMenu"
-          style="background-color: #f9f9f9; padding: 50px 15px; border-right: solid black 1px"
-        >
+        <b-col cols="2" id="sideMenu" class="innerpage-sidebar">
           <div>
             <h4 style="text-align-last: center">Accommodations</h4>
             <b-list-group v-for="(property, index) in properties" :key="index">
-              <b-list-group-item @click="changeSelectHotel(property.id)" href="#some-link"
-                 class="d-flex justify-content-between align-items-center">
+              <b-list-group-item
+                @click="changeSelectHotel(property.id)"
+                href="#some-link"
+                class="d-flex justify-content-between align-items-center"
+              >
                 {{ property.hotelName }}
-                <b-spinner v-show="(property.id === getCurrentHotelID && getIsLoading)" small variant="primary" label="Spinning"></b-spinner>
+                <b-spinner
+                  v-show="property.id === getCurrentHotelID && getIsLoading"
+                  small
+                  variant="primary"
+                  label="Spinning"
+                ></b-spinner>
               </b-list-group-item>
             </b-list-group>
           </div>
@@ -59,7 +77,7 @@
           </div>
         </b-col>
         <b-col cols="10">
-          <!-- <b-row>
+          <b-row>
             <b-col cols="12">
               <div
                 class="form-group row"
@@ -81,12 +99,11 @@
                 </span>
               </div>
             </b-col>
-          </b-row> -->
-          <hr />
+          </b-row>
           <Calendar />
         </b-col>
       </b-row>
-    </b-card>
+    </div>
     <!-- <script
       type="application/javascript"
       src="//tp.media/content?promo_id=2811&shmarker=253385&campaign_id=100&trs=160975&color_button=%23FF0000&target_host=www.aviasales.com%2Fsearch&locale=en&powered_by=true&airline=&with_fallback=false&non_direct_flights=true&min_lines=5&border_radius=0&color_background=%23FFFFFF&color_text=%23000000&color_border=%23FFFFFF&destination=BKK&origin=LON"
@@ -272,13 +289,13 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import Calendar from "../calendar/Calendar.vue";
 
 export default {
   data() {
     return {
-      currentHotel_ID:null,
+      currentHotel_ID: null,
       miniProfileModal: false,
       company: {
         company: "",
@@ -292,14 +309,14 @@ export default {
       newCalendar: false,
     };
   },
-  watch:{
-    GroupMailToSend(){
-        console.log(this.GroupMailToSend)
-        this.SET_GROUP_MAIL_TO_SEND(this.GroupMailToSend)
-     },
-    getCurrentHotelID(){
-      this.actionGetHotelRooms(this.currentHotel_ID)
-    }
+  watch: {
+    GroupMailToSend() {
+      console.log(this.GroupMailToSend);
+      this.SET_GROUP_MAIL_TO_SEND(this.GroupMailToSend);
+    },
+    getCurrentHotelID() {
+      this.actionGetHotelRooms(this.currentHotel_ID);
+    },
   },
 
   async created() {
@@ -309,7 +326,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIsLoading:'calendar/getIsLoading',
+      getIsLoading: "calendar/getIsLoading",
       getCurrentHotelID: "calendar/getCurrentHotelID",
     }),
     /* userLists() {
@@ -340,14 +357,14 @@ export default {
   methods: {
     ...mapMutations({
       SET_CURRENT_HOTEL_ID: "calendar/SET_CURRENT_HOTEL_ID",
-      SET_GROUP_MAIL_TO_SEND:'calendar/SET_GROUP_MAIL_TO_SEND'
+      SET_GROUP_MAIL_TO_SEND: "calendar/SET_GROUP_MAIL_TO_SEND",
     }),
     ...mapActions({
       actionGetHotelRooms: "calendar/getHotelRooms",
     }),
-    changeSelectHotel(hotel_id){
-      this.isLoading = true
-      this.SET_CURRENT_HOTEL_ID(hotel_id)
+    changeSelectHotel(hotel_id) {
+      this.isLoading = true;
+      this.SET_CURRENT_HOTEL_ID(hotel_id);
     },
 
     async getuserlists() {

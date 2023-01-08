@@ -251,9 +251,10 @@ export default {
     },
   },
   async created() {
-    await this.getProperties();
     await this.getPermissions();
-    this.getNotifications();
+    await this.getNotifications();
+    await this.getProperties();
+    this.unreadNotifications;
 
     /* if (await this.checkToken()) {
       await this.getProperties();
@@ -293,7 +294,9 @@ export default {
     getNotifications() {
       this.$store
         .dispatch("notificationsArea/getNotifications")
-        .then(() => {})
+        .then(() => {
+          this.unreadNotifications();
+        })
         .catch(() => {});
     },
     async getProperties() {

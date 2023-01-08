@@ -188,7 +188,7 @@
   ); */
 }
 .sidebar[data="dark"] {
-  background: linear-gradient(0deg, #000000 0%, #394b7e 100%);
+  background: linear-gradient(0deg, #000000 0%, #212529 100%);
 }
 .sidebar[data="light"] .nav li > a {
   color: #000000;

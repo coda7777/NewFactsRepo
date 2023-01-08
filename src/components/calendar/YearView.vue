@@ -46,7 +46,6 @@
           :month="currentMonth"
           :year="currentYear"
         >
-
         </RoomRow>
       </div>
     </div>
@@ -61,6 +60,7 @@ import RoomRow from "./RoomRow.vue";
 
 export default {
   name: "YearView",
+  // eslint-disable-next-line vue/no-unused-components
   components: { CreateSource, RoomRow },
   data() {
     return {

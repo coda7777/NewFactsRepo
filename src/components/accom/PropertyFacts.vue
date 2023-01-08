@@ -12,7 +12,7 @@
             <th scope="col">State</th>
             <th scope="col">City</th>
             <th scope="col">Hotel</th>
-            <th scope="col"></th>
+            <th scope="col">Status</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -23,9 +23,18 @@
             <td>{{ property.state }}</td>
             <td>{{ property.city }}</td>
             <td>{{ property.hotelName }}</td>
-            <b-button variant="outline-success" :to="`/property/${property.id}/general`">
-              Edit {{ property.hotelName }}
-            </b-button>
+            <td v-if="property.publish" class="text-success">Live</td>
+            <td v-else class="text-danger">Unpublished</td>
+            <td>
+              <b-button
+                variant="outline-success"
+                size="sm"
+                :to="`/property/${property.id}/general`"
+                style="min-width: 120px"
+              >
+                Edit {{ property.hotelName }}
+              </b-button>
+            </td>
           </tr>
         </tbody>
       </table>
